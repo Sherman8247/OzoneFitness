@@ -1,0 +1,60 @@
+﻿@page "/gyms/details"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Gym</h2>
+    <hr />
+    @if (gym is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">GymID</dt>
+            <dd class="col-sm-10">@gym.GymID</dd>
+            <dt class="col-sm-2">Address</dt>
+            <dd class="col-sm-10">@gym.Address</dd>
+            <dt class="col-sm-2">OperatingHours</dt>
+            <dd class="col-sm-10">@gym.OperatingHours</dd>
+            <dt class="col-sm-2">Capacity</dt>
+            <dd class="col-sm-10">@gym.Capacity</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@gym.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@gym.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@gym.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@gym.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/gyms/edit?id={gym.ID}")">Edit</a> |
+            <a href="@($"/gyms")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Gym? gym;
+
+    [SupplyParameterFromQuery]
+    private int ID { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        gym = await context.Gym.FirstOrDefaultAsync(m => m.ID == ID);
+
+        if (gym is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

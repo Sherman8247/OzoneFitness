@@ -1,0 +1,79 @@
+﻿@page "/gyms/create"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Gym</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Gym" OnValidSubmit="AddGym" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="gymid" class="form-label">GymID:</label> 
+                <InputNumber id="gymid" @bind-Value="Gym.GymID" class="form-control" /> 
+                <ValidationMessage For="() => Gym.GymID" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label> 
+                <InputText id="address" @bind-Value="Gym.Address" class="form-control" /> 
+                <ValidationMessage For="() => Gym.Address" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="operatinghours" class="form-label">OperatingHours:</label> 
+                <InputText id="operatinghours" @bind-Value="Gym.OperatingHours" class="form-control" /> 
+                <ValidationMessage For="() => Gym.OperatingHours" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity:</label> 
+                <InputNumber id="capacity" @bind-Value="Gym.Capacity" class="form-control" /> 
+                <ValidationMessage For="() => Gym.Capacity" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datecreated" class="form-label">DateCreated:</label> 
+                <InputDate id="datecreated" @bind-Value="Gym.DateCreated" class="form-control" /> 
+                <ValidationMessage For="() => Gym.DateCreated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dateupdated" class="form-label">DateUpdated:</label> 
+                <InputDate id="dateupdated" @bind-Value="Gym.DateUpdated" class="form-control" /> 
+                <ValidationMessage For="() => Gym.DateUpdated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="createdby" class="form-label">CreatedBy:</label> 
+                <InputText id="createdby" @bind-Value="Gym.CreatedBy" class="form-control" /> 
+                <ValidationMessage For="() => Gym.CreatedBy" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="updatedby" class="form-label">UpdatedBy:</label> 
+                <InputText id="updatedby" @bind-Value="Gym.UpdatedBy" class="form-control" /> 
+                <ValidationMessage For="() => Gym.UpdatedBy" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/gyms">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Gym Gym { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddGym()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Gym.Add(Gym);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/gyms");
+    }
+}

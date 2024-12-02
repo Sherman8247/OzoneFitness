@@ -1,0 +1,62 @@
+﻿@page "/trainers/details"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Trainer</h2>
+    <hr />
+    @if (trainer is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">TrainerID</dt>
+            <dd class="col-sm-10">@trainer.TrainerID</dd>
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@trainer.Name</dd>
+            <dt class="col-sm-2">ContactInfo</dt>
+            <dd class="col-sm-10">@trainer.ContactInfo</dd>
+            <dt class="col-sm-2">YearsOfExperience</dt>
+            <dd class="col-sm-10">@trainer.YearsOfExperience</dd>
+            <dt class="col-sm-2">GymID</dt>
+            <dd class="col-sm-10">@trainer.GymID</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@trainer.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@trainer.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@trainer.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@trainer.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/trainers/edit?id={trainer.ID}")">Edit</a> |
+            <a href="@($"/trainers")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Trainer? trainer;
+
+    [SupplyParameterFromQuery]
+    private int ID { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        trainer = await context.Trainer.FirstOrDefaultAsync(m => m.ID == ID);
+
+        if (trainer is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

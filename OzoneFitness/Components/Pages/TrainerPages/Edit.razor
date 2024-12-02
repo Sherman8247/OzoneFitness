@@ -1,0 +1,129 @@
+﻿@page "/trainers/edit"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Trainer</h2>
+<hr />
+@if (Trainer is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Trainer" OnValidSubmit="UpdateTrainer" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary role="alert"/>
+                <input type="hidden" name="Trainer.ID" value="@Trainer.ID" />
+                <div class="mb-3">
+                    <label for="trainerid" class="form-label">TrainerID:</label>
+                    <InputNumber id="trainerid" @bind-Value="Trainer.TrainerID" class="form-control" />
+                    <ValidationMessage For="() => Trainer.TrainerID" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <InputText id="name" @bind-Value="Trainer.Name" class="form-control" />
+                    <ValidationMessage For="() => Trainer.Name" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="contactinfo" class="form-label">ContactInfo:</label>
+                    <InputText id="contactinfo" @bind-Value="Trainer.ContactInfo" class="form-control" />
+                    <ValidationMessage For="() => Trainer.ContactInfo" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="yearsofexperience" class="form-label">YearsOfExperience:</label>
+                    <InputNumber id="yearsofexperience" @bind-Value="Trainer.YearsOfExperience" class="form-control" />
+                    <ValidationMessage For="() => Trainer.YearsOfExperience" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="gymid" class="form-label">GymID:</label>
+                    <InputNumber id="gymid" @bind-Value="Trainer.GymID" class="form-control" />
+                    <ValidationMessage For="() => Trainer.GymID" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="datecreated" class="form-label">DateCreated:</label>
+                    <InputDate id="datecreated" @bind-Value="Trainer.DateCreated" class="form-control" />
+                    <ValidationMessage For="() => Trainer.DateCreated" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="dateupdated" class="form-label">DateUpdated:</label>
+                    <InputDate id="dateupdated" @bind-Value="Trainer.DateUpdated" class="form-control" />
+                    <ValidationMessage For="() => Trainer.DateUpdated" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="createdby" class="form-label">CreatedBy:</label>
+                    <InputText id="createdby" @bind-Value="Trainer.CreatedBy" class="form-control" />
+                    <ValidationMessage For="() => Trainer.CreatedBy" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="updatedby" class="form-label">UpdatedBy:</label>
+                    <InputText id="updatedby" @bind-Value="Trainer.UpdatedBy" class="form-control" />
+                    <ValidationMessage For="() => Trainer.UpdatedBy" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/trainers">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int ID { get; set; }
+
+    [SupplyParameterFromForm]
+    private Trainer? Trainer { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Trainer ??= await context.Trainer.FirstOrDefaultAsync(m => m.ID == ID);
+
+        if (Trainer is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateTrainer()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Trainer!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!TrainerExists(Trainer!.ID))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/trainers");
+    }
+
+    private bool TrainerExists(int id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Trainer.Any(e => e.ID == id);
+    }
+}

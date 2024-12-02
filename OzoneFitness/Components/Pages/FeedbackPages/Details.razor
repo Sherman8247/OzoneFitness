@@ -1,0 +1,64 @@
+﻿@page "/feedbacks/details"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Feedback</h2>
+    <hr />
+    @if (feedback is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">FeedbackID</dt>
+            <dd class="col-sm-10">@feedback.FeedbackID</dd>
+            <dt class="col-sm-2">Rating</dt>
+            <dd class="col-sm-10">@feedback.Rating</dd>
+            <dt class="col-sm-2">Comments</dt>
+            <dd class="col-sm-10">@feedback.Comments</dd>
+            <dt class="col-sm-2">DateOfSubmission</dt>
+            <dd class="col-sm-10">@feedback.DateOfSubmission</dd>
+            <dt class="col-sm-2">TrainerID</dt>
+            <dd class="col-sm-10">@feedback.TrainerID</dd>
+            <dt class="col-sm-2">CustomerID</dt>
+            <dd class="col-sm-10">@feedback.CustomerID</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@feedback.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@feedback.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@feedback.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@feedback.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/feedbacks/edit?id={feedback.ID}")">Edit</a> |
+            <a href="@($"/feedbacks")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Feedback? feedback;
+
+    [SupplyParameterFromQuery]
+    private int ID { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        feedback = await context.Feedback.FirstOrDefaultAsync(m => m.ID == ID);
+
+        if (feedback is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}
