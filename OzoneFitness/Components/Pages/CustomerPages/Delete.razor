@@ -19,7 +19,7 @@
     else {
         <dl class="row">
             <dt class="col-sm-2">CustomerID</dt>
-            <dd class="col-sm-10">@customer.CustomerID</dd>
+            <dd class="col-sm-10">@customer.CustomerId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">Name</dt>
@@ -65,7 +65,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        customer = await context.Customer.FirstOrDefaultAsync(m => m.ID == ID);
+        customer = await context.Customer.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (customer is null)
         {

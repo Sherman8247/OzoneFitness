@@ -21,11 +21,11 @@ else
             <EditForm method="post" Model="Booking" OnValidSubmit="UpdateBooking" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Booking.Id" value="@Booking.ID" />
+                <input type="hidden" name="Booking.Id" value="@Booking.Id" />
                 <div class="mb-3">
                     <label for="bookingid" class="form-label">BookingID:</label>
-                    <InputNumber id="bookingid" @bind-Value="Booking.BookingID" class="form-control" />
-                    <ValidationMessage For="() => Booking.BookingID" class="text-danger" />
+                    <InputNumber id="bookingid" @bind-Value="Booking.BookingId" class="form-control" />
+                    <ValidationMessage For="() => Booking.BookingId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date:</label>
@@ -43,14 +43,14 @@ else
                     <ValidationMessage For="() => Booking.Duration" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="customerid" class="form-label">CustomerID:</label>
-                    <InputNumber id="customerid" @bind-Value="Booking.CustomerID" class="form-control" />
-                    <ValidationMessage For="() => Booking.CustomerID" class="text-danger" />
+                    <label for="customerid" class="form-label">CustomerId:</label>
+                    <InputNumber id="customerid" @bind-Value="Booking.CustomerId" class="form-control" />
+                    <ValidationMessage For="() => Booking.CustomerId" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="scheduleid" class="form-label">ScheduleID:</label>
-                    <InputNumber id="scheduleid" @bind-Value="Booking.ScheduleID" class="form-control" />
-                    <ValidationMessage For="() => Booking.ScheduleID" class="text-danger" />
+                    <label for="scheduleid" class="form-label">ScheduleId:</label>
+                    <InputNumber id="scheduleid" @bind-Value="Booking.ScheduleId" class="form-control" />
+                    <ValidationMessage For="() => Booking.ScheduleId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="datecreated" class="form-label">DateCreated:</label>
@@ -92,7 +92,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Booking ??= await context.Booking.FirstOrDefaultAsync(m => m.ID == Id);
+        Booking ??= await context.Booking.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (Booking is null)
         {
@@ -113,7 +113,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!BookingExists(Booking!.ID))
+            if (!BookingExists(Booking!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -129,6 +129,6 @@ else
     private bool BookingExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Booking.Any(e => e.ID == id);
+        return context.Booking.Any(e => e.Id == id);
     }
 }

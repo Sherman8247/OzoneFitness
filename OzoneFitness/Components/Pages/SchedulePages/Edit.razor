@@ -21,11 +21,11 @@ else
             <EditForm method="post" Model="Schedule" OnValidSubmit="UpdateSchedule" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Schedule.ID" value="@Schedule.ID" />
+                <input type="hidden" name="Schedule.Id" value="@Schedule.Id" />
                 <div class="mb-3">
                     <label for="scheduleid" class="form-label">ScheduleID:</label>
-                    <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleID" class="form-control" />
-                    <ValidationMessage For="() => Schedule.ScheduleID" class="text-danger" />
+                    <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleId" class="form-control" />
+                    <ValidationMessage For="() => Schedule.ScheduleId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="dayofweek" class="form-label">DayOfWeek:</label>
@@ -43,9 +43,9 @@ else
                     <ValidationMessage For="() => Schedule.EndTime" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="trainerid" class="form-label">TrainerID:</label>
-                    <InputNumber id="trainerid" @bind-Value="Schedule.TrainerID" class="form-control" />
-                    <ValidationMessage For="() => Schedule.TrainerID" class="text-danger" />
+                    <label for="trainerid" class="form-label">TrainerId:</label>
+                    <InputNumber id="trainerid" @bind-Value="Schedule.TrainerId" class="form-control" />
+                    <ValidationMessage For="() => Schedule.TrainerId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="datecreated" class="form-label">DateCreated:</label>
@@ -87,7 +87,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Schedule ??= await context.Schedule.FirstOrDefaultAsync(m => m.ID == ID);
+        Schedule ??= await context.Schedule.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (Schedule is null)
         {
@@ -108,7 +108,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!ScheduleExists(Schedule!.ID))
+            if (!ScheduleExists(Schedule!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -124,6 +124,6 @@ else
     private bool ScheduleExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Schedule.Any(e => e.ID == id);
+        return context.Schedule.Any(e => e.Id == id);
     }
 }

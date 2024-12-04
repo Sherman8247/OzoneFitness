@@ -6,13 +6,15 @@ public class CustomerID : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
-        builder.HasKey(c => c.CustomerID); 
+ //builder.HasKey(c => c.CustomerID); 
 
         builder.HasData(
            new Customer
            {
-               CustomerID = 1, 
+               Id = 1, 
                Name = "Jonas",
+               Email = "Jonas@gmail.com",
+               MembershipStatus = "Member",
                DateCreated = DateTime.Now,
                DateUpdated = DateTime.Now,
                CreatedBy = "System",
@@ -20,8 +22,10 @@ public class CustomerID : IEntityTypeConfiguration<Customer>
            },
            new Customer
            {
-               CustomerID = 2, 
+               Id = 2, 
                Name = "Sherman",
+               Email = "Sherman@gmail.com",
+               MembershipStatus = "Nil",
                DateCreated = DateTime.Now,
                DateUpdated = DateTime.Now,
                CreatedBy = "System",

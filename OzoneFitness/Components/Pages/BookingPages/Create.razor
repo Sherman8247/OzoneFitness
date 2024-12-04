@@ -16,9 +16,9 @@
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="bookingid" class="form-label">BookingID:</label> 
-                <InputNumber id="bookingid" @bind-Value="Booking.BookingID" class="form-control" /> 
-                <ValidationMessage For="() => Booking.BookingID" class="text-danger" /> 
+                <label for="bookingId" class="form-label">BookingId:</label>
+                <InputNumber id="bookingId" @bind-Value="Booking.BookingId" class="form-control" />
+                <ValidationMessage For="() => Booking.BookingId" class="text-danger" /> 
             </div>        
             <div class="mb-3">
                 <label for="date" class="form-label">Date:</label> 
@@ -36,14 +36,14 @@
                 <ValidationMessage For="() => Booking.Duration" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="customerid" class="form-label">CustomerID:</label> 
-                <InputNumber id="customerid" @bind-Value="Booking.CustomerID" class="form-control" /> 
-                <ValidationMessage For="() => Booking.CustomerID" class="text-danger" /> 
+                <label for="customerid" class="form-label">CustomerId:</label>
+                <InputNumber id="customerid" @bind-Value="Booking.CustomerId" class="form-control" />
+                <ValidationMessage For="() => Booking.CustomerId" class="text-danger" />
             </div>        
             <div class="mb-3">
                 <label for="scheduleid" class="form-label">ScheduleID:</label> 
-                <InputNumber id="scheduleid" @bind-Value="Booking.ScheduleID" class="form-control" /> 
-                <ValidationMessage For="() => Booking.ScheduleID" class="text-danger" /> 
+                <InputNumber id="scheduleid" @bind-Value="Booking.ScheduleId" class="form-control" />
+                <ValidationMessage For="() => Booking.ScheduleId" class="text-danger" />
             </div>        
             <div class="mb-3">
                 <label for="datecreated" class="form-label">DateCreated:</label> 

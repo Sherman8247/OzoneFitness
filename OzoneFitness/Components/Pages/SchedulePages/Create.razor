@@ -16,9 +16,9 @@
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" role="alert"/>
             <div class="mb-3">
-                <label for="scheduleid" class="form-label">ScheduleID:</label> 
-                <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleID" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.ScheduleID" class="text-danger" /> 
+                <label for="scheduleid" class="form-label">ScheduleId:</label>
+                <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleId" class="form-control" />
+                <ValidationMessage For="() => Schedule.ScheduleId" class="text-danger" />
             </div>        
             <div class="mb-3">
                 <label for="dayofweek" class="form-label">DayOfWeek:</label> 
@@ -36,9 +36,9 @@
                 <ValidationMessage For="() => Schedule.EndTime" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="trainerid" class="form-label">TrainerID:</label> 
-                <InputNumber id="trainerid" @bind-Value="Schedule.TrainerID" class="form-control" /> 
-                <ValidationMessage For="() => Schedule.TrainerID" class="text-danger" /> 
+                <label for="trainerid" class="form-label">TrainerId:</label>
+                <InputNumber id="trainerid" @bind-Value="Schedule.TrainerId" class="form-control" />
+                <ValidationMessage For="() => Schedule.TrainerId" class="text-danger" />
             </div>        
             <div class="mb-3">
                 <label for="datecreated" class="form-label">DateCreated:</label> 

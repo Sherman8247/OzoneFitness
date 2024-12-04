@@ -15,20 +15,20 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Trainer">
-    <PropertyColumn Property="trainer => trainer.TrainerID" />
+    <PropertyColumn Property="trainer => trainer.TrainerId" />
     <PropertyColumn Property="trainer => trainer.Name" />
     <PropertyColumn Property="trainer => trainer.ContactInfo" />
     <PropertyColumn Property="trainer => trainer.YearsOfExperience" />
-    <PropertyColumn Property="trainer => trainer.GymID" />
+    <PropertyColumn Property="trainer => trainer.GymId" />
     <PropertyColumn Property="trainer => trainer.DateCreated" />
     <PropertyColumn Property="trainer => trainer.DateUpdated" />
     <PropertyColumn Property="trainer => trainer.CreatedBy" />
     <PropertyColumn Property="trainer => trainer.UpdatedBy" />
 
     <TemplateColumn Context="trainer">
-        <a href="@($"trainers/edit?id={trainer.ID}")">Edit</a> |
-        <a href="@($"trainers/details?id={trainer.ID}")">Details</a> |
-        <a href="@($"trainers/delete?id={trainer.ID}")">Delete</a>
+        <a href="@($"trainers/edit?id={trainer.Id}")">Edit</a> |
+        <a href="@($"trainers/details?id={trainer.Id}")">Details</a> |
+        <a href="@($"trainers/delete?id={trainer.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

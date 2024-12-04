@@ -21,11 +21,11 @@ else
             <EditForm method="post" Model="Gym" OnValidSubmit="UpdateGym" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Gym.ID" value="@Gym.ID" />
+                <input type="hidden" name="Gym.Id" value="@Gym.Id" />
                 <div class="mb-3">
                     <label for="gymid" class="form-label">GymID:</label>
-                    <InputNumber id="gymid" @bind-Value="Gym.GymID" class="form-control" />
-                    <ValidationMessage For="() => Gym.GymID" class="text-danger" />
+                    <InputNumber id="gymid" @bind-Value="Gym.GymId" class="form-control" />
+                    <ValidationMessage For="() => Gym.GymId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address:</label>
@@ -82,7 +82,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Gym ??= await context.Gym.FirstOrDefaultAsync(m => m.ID == ID);
+        Gym ??= await context.Gym.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (Gym is null)
         {
@@ -103,7 +103,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!GymExists(Gym!.ID))
+            if (!GymExists(Gym!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -119,6 +119,6 @@ else
     private bool GymExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Gym.Any(e => e.ID == id);
+        return context.Gym.Any(e => e.Id == id);
     }
 }

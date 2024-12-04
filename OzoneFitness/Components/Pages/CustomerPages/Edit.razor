@@ -21,11 +21,11 @@ else
             <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Customer.ID" value="@Customer.ID" />
+                <input type="hidden" name="Customer.ID" value="@Customer.Id" />
                 <div class="mb-3">
                     <label for="customerid" class="form-label">CustomerID:</label>
-                    <InputNumber id="customerid" @bind-Value="Customer.CustomerID" class="form-control" />
-                    <ValidationMessage For="() => Customer.CustomerID" class="text-danger" />
+                    <InputNumber id="customerid" @bind-Value="Customer.CustomerId" class="form-control" />
+                    <ValidationMessage For="() => Customer.CustomerId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
@@ -82,7 +82,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.ID == ID);
+        Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (Customer is null)
         {
@@ -103,7 +103,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!CustomerExists(Customer!.ID))
+            if (!CustomerExists(Customer!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -119,6 +119,6 @@ else
     private bool CustomerExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Customer.Any(e => e.ID == id);
+        return context.Customer.Any(e => e.Id == id);
     }
 }
