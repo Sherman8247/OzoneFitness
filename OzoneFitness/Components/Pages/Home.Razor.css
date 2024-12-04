@@ -64,7 +64,7 @@ h1 {
     text-align: center; /* Center the text */
     font-weight: bold; /* Ensure bold styling */
     margin: 20px 0; /* Adjust vertical spacing */
-    color: #333; /* Text color (customize to your design) */
+    color: white; /* Text color (customize to your design) */
 }
 
 /* Styling for "No Pain, No Gain!" */
@@ -73,10 +73,10 @@ p.tagline {
     font-style: italic; /* Add emphasis with italic style */
     font-weight: bold; /* Make the text bold */
     text-align: center; /* Center the text */
-    color: #5a189a; /* Use an appealing color (purple in this case) */
+    color: white; /* Use an appealing color (purple in this case) */
     letter-spacing: 0.1em; /* Slightly spread the letters */
     word-spacing: 0.3em; /* Add some spacing between words */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add a subtle shadow for depth */
+    text-shadow: 2px 2px 5px red; /* Add a subtle shadow for depth */
     margin-top: 20px; /* Add spacing above the text */
 }
 
