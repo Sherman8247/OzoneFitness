@@ -35,6 +35,9 @@
             text-decoration: none;
             font-size: 16px;
             transition: color 0.3s ease;
+            line-height: 40px; /* Matches the height of the button */
+            padding: 0 5px; /* Optional: Add horizontal padding for spacing */
+            display: inline-block; /* Ensures proper alignment with flexbox */
         }
 
             .top-bar .nav-links a:hover {
@@ -80,7 +83,6 @@ p.tagline {
     margin-top: 20px; /* Add spacing above the text */
 }
 
-
 .button {
     background-color: hotpink;
     border-radius: 8px;
@@ -107,6 +109,7 @@ p.tagline {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
