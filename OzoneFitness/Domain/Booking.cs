@@ -1,8 +1,8 @@
 ﻿namespace OzoneFitness.Domain;
 
-public class Booking: BaseDomainBooking
+public class Booking : BaseDomainBooking
 {
-    public int BookingId{ get; set; }
+    public int BookingId { get; set; }
     public DateTime Date { get; set; }
     public string Time { get; set; } // If Time is a string, ensure validation
     public int Duration { get; set; }

@@ -8,13 +8,15 @@ namespace OzoneFitness.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Gym> builder)
         {
-            builder.HasKey(c => c.GymId);
+            //builder.HasKey(c => c.GymID);
 
             builder.HasData(
                new Gym
                {
-                   GymId = 1,
+                   Id = 1,
                    Address = "Pasir ris Mall",
+                   OperatingHours = "12",
+                   Capacity = 150,
                    DateCreated = DateTime.Now,
                    DateUpdated = DateTime.Now,
                    CreatedBy = "System",
@@ -22,8 +24,10 @@ namespace OzoneFitness.Configurations.Entities
                },
                new Gym
                {
-                   GymId = 2,
+                   Id = 2,
                    Address = "Tampines Mall",
+                   OperatingHours = "10",
+                   Capacity = 200,
                    DateCreated = DateTime.Now,
                    DateUpdated = DateTime.Now,
                    CreatedBy = "System",
