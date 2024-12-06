@@ -8,12 +8,12 @@ namespace OzoneFitness.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Trainer> builder)
         {
-            builder.HasKey(c => c.TrainerID);
+            builder.HasKey(c => c.TrainerId);
 
             builder.HasData(
                new Trainer
                {
-                   TrainerID = 1,
+                   TrainerId = 1,
                    Name = "Mr Goh",
                    DateCreated = DateTime.Now,
                    DateUpdated = DateTime.Now,
@@ -22,7 +22,7 @@ namespace OzoneFitness.Configurations.Entities
                },
                new Trainer
                {
-                   TrainerID = 2,
+                   TrainerId = 2,
                    Name = "Mr Tang",
                    DateCreated = DateTime.Now,
                    DateUpdated = DateTime.Now,

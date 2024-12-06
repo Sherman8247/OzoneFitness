@@ -15,7 +15,7 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Customer">
-    <PropertyColumn Property="customer => customer.CustomerID" />
+    <PropertyColumn Property="customer => customer.CustomerId" />
     <PropertyColumn Property="customer => customer.Name" />
     <PropertyColumn Property="customer => customer.Email" />
     <PropertyColumn Property="customer => customer.MembershipStatus" />
@@ -25,9 +25,9 @@
     <PropertyColumn Property="customer => customer.UpdatedBy" />
 
     <TemplateColumn Context="customer">
-        <a href="@($"customers/edit?id={customer.ID}")">Edit</a> |
-        <a href="@($"customers/details?id={customer.ID}")">Details</a> |
-        <a href="@($"customers/delete?id={customer.ID}")">Delete</a>
+        <a href="@($"customers/edit?id={customer.Id}")">Edit</a> |
+        <a href="@($"customers/details?id={customer.Id}")">Details</a> |
+        <a href="@($"customers/delete?id={customer.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

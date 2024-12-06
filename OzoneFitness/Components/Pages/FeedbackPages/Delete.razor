@@ -19,7 +19,7 @@
     else {
         <dl class="row">
             <dt class="col-sm-2">FeedbackID</dt>
-            <dd class="col-sm-10">@feedback.FeedbackID</dd>
+            <dd class="col-sm-10">@feedback.FeedbackId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">Rating</dt>
@@ -34,12 +34,12 @@
             <dd class="col-sm-10">@feedback.DateOfSubmission</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">TrainerID</dt>
-            <dd class="col-sm-10">@feedback.TrainerID</dd>
+            <dt class="col-sm-2">TrainerId</dt>
+            <dd class="col-sm-10">@feedback.TrainerId</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">CustomerID</dt>
-            <dd class="col-sm-10">@feedback.CustomerID</dd>
+            <dt class="col-sm-2">CustomerId</dt>
+            <dd class="col-sm-10">@feedback.CustomerId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">DateCreated</dt>
@@ -73,7 +73,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        feedback = await context.Feedback.FirstOrDefaultAsync(m => m.ID == ID);
+        feedback = await context.Feedback.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (feedback is null)
         {

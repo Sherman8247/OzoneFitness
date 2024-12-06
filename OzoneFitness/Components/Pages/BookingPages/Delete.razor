@@ -19,7 +19,7 @@
     else {
         <dl class="row">
             <dt class="col-sm-2">BookingID</dt>
-            <dd class="col-sm-10">@booking.BookingID</dd>
+            <dd class="col-sm-10">@booking.BookingId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">Date</dt>
@@ -35,11 +35,11 @@
         </dl>
         <dl class="row">
             <dt class="col-sm-2">CustomerID</dt>
-            <dd class="col-sm-10">@booking.CustomerID</dd>
+            <dd class="col-sm-10">@booking.CustomerId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">ScheduleID</dt>
-            <dd class="col-sm-10">@booking.ScheduleID</dd>
+            <dd class="col-sm-10">@booking.ScheduleId</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">DateCreated</dt>
@@ -73,7 +73,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        booking = await context.Booking.FirstOrDefaultAsync(m => m.ID == Id);
+        booking = await context.Booking.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (booking is null)
         {

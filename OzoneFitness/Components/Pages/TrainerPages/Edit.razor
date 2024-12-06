@@ -21,11 +21,11 @@ else
             <EditForm method="post" Model="Trainer" OnValidSubmit="UpdateTrainer" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert"/>
-                <input type="hidden" name="Trainer.ID" value="@Trainer.ID" />
+                <input type="hidden" name="Trainer.Id" value="@Trainer.Id" />
                 <div class="mb-3">
                     <label for="trainerid" class="form-label">TrainerID:</label>
-                    <InputNumber id="trainerid" @bind-Value="Trainer.TrainerID" class="form-control" />
-                    <ValidationMessage For="() => Trainer.TrainerID" class="text-danger" />
+                    <InputNumber id="trainerid" @bind-Value="Trainer.TrainerId" class="form-control" />
+                    <ValidationMessage For="() => Trainer.TrainerId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
@@ -43,9 +43,9 @@ else
                     <ValidationMessage For="() => Trainer.YearsOfExperience" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="gymid" class="form-label">GymID:</label>
-                    <InputNumber id="gymid" @bind-Value="Trainer.GymID" class="form-control" />
-                    <ValidationMessage For="() => Trainer.GymID" class="text-danger" />
+                    <label for="gymid" class="form-label">GymId:</label>
+                    <InputNumber id="gymid" @bind-Value="Trainer.GymId" class="form-control" />
+                    <ValidationMessage For="() => Trainer.GymId" class="text-danger" />
                 </div>
                 <div class="mb-3">
                     <label for="datecreated" class="form-label">DateCreated:</label>
@@ -87,7 +87,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Trainer ??= await context.Trainer.FirstOrDefaultAsync(m => m.ID == ID);
+        Trainer ??= await context.Trainer.FirstOrDefaultAsync(m => m.Id == ID);
 
         if (Trainer is null)
         {
@@ -108,7 +108,7 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!TrainerExists(Trainer!.ID))
+            if (!TrainerExists(Trainer!.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -124,6 +124,6 @@ else
     private bool TrainerExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Trainer.Any(e => e.ID == id);
+        return context.Trainer.Any(e => e.Id == id);
     }
 }

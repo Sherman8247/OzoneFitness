@@ -18,7 +18,7 @@
     else {
         <dl class="row">
             <dt class="col-sm-2">BookingID</dt>
-            <dd class="col-sm-10">@booking.BookingID</dd>
+            <dd class="col-sm-10">@booking.BookingId</dd>
             <dt class="col-sm-2">Date</dt>
             <dd class="col-sm-10">@booking.Date</dd>
             <dt class="col-sm-2">Time</dt>
@@ -26,9 +26,9 @@
             <dt class="col-sm-2">Duration</dt>
             <dd class="col-sm-10">@booking.Duration</dd>
             <dt class="col-sm-2">CustomerID</dt>
-            <dd class="col-sm-10">@booking.CustomerID</dd>
+            <dd class="col-sm-10">@booking.CustomerId</dd>
             <dt class="col-sm-2">ScheduleID</dt>
-            <dd class="col-sm-10">@booking.ScheduleID</dd>
+            <dd class="col-sm-10">@booking.ScheduleId</dd>
             <dt class="col-sm-2">DateCreated</dt>
             <dd class="col-sm-10">@booking.DateCreated</dd>
             <dt class="col-sm-2">DateUpdated</dt>
@@ -39,7 +39,7 @@
             <dd class="col-sm-10">@booking.UpdatedBy</dd>
         </dl>
         <div>
-            <a href="@($"/bookings/edit?id={booking.ID}")">Edit</a> |
+            <a href="@($"/bookings/edit?id={booking.Id}")">Edit</a> |
             <a href="@($"/bookings")">Back to List</a>
         </div>
     }
@@ -54,7 +54,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        booking = await context.Booking.FirstOrDefaultAsync(m => m.ID == Id);
+        booking = await context.Booking.FirstOrDefaultAsync(m => m.Id == Id);
 
         if (booking is null)
         {

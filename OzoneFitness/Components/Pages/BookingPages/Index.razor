@@ -15,21 +15,21 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Booking">
-    <PropertyColumn Property="booking => booking.BookingID" />
+    <PropertyColumn Property="booking => booking.BookingId" />
     <PropertyColumn Property="booking => booking.Date" />
     <PropertyColumn Property="booking => booking.Time" />
     <PropertyColumn Property="booking => booking.Duration" />
-    <PropertyColumn Property="booking => booking.CustomerID" />
-    <PropertyColumn Property="booking => booking.ScheduleID" />
+    <PropertyColumn Property="booking => booking.CustomerId" />
+    <PropertyColumn Property="booking => booking.ScheduleId" />
     <PropertyColumn Property="booking => booking.DateCreated" />
     <PropertyColumn Property="booking => booking.DateUpdated" />
     <PropertyColumn Property="booking => booking.CreatedBy" />
     <PropertyColumn Property="booking => booking.UpdatedBy" />
 
     <TemplateColumn Context="booking">
-        <a href="@($"bookings/edit?id={booking.ID}")">Edit</a> |
-        <a href="@($"bookings/details?id={booking.ID}")">Details</a> |
-        <a href="@($"bookings/delete?id={booking.ID}")">Delete</a>
+        <a href="@($"bookings/edit?id={booking.Id}")">Edit</a> |
+        <a href="@($"bookings/details?id={booking.Id}")">Details</a> |
+        <a href="@($"bookings/delete?id={booking.Id}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 
