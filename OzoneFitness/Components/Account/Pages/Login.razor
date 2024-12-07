@@ -1,7 +1,7 @@
 ﻿@page "/Account/Login"
 
 @using System.ComponentModel.DataAnnotations
-@using Microsoft.AspNetCore.Authentication
+@* @using Microsoft.AspNetCore.Authentication *@
 @using Microsoft.AspNetCore.Identity
 @using OzoneFitness.Data
 
@@ -51,19 +51,69 @@
                     <p>
                         <a href="Account/ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
+                    <div class="use another service">
+                        <section>
+                            <h3>Use another service to log in.</h3>
+                            <hr />
+                            <ExternalLoginPicker />
+                        </section>
+                    </div>
                 </div>
             </EditForm>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            <ExternalLoginPicker />
-        </section>
-    </div>
 </div>
+<style>
+    body {
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
 
+    .col-md-4 {
+        background-color: #1c1c1c;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
+        color: grey;
+        width: 600px; /* Adjust width for the form */
+        text-align: center;
+    }
+
+    h1 {
+        color: grey;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-bottom: 20px; /* Add spacing below the header */
+    }
+
+    .w-100.btn.btn-lg.btn-primary {
+        background-color: hotpink;
+        color: lawngreen;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+        width: 100%; /* Ensures the button spans the form width */
+    }
+
+    .form-floating {
+        margin-bottom: 15px; /* Adds spacing between input fields */
+    }
+
+    .use another service {
+        text-align: center; 
+        margin-top: 20px; 
+        margin-bottom: 10px; /* Add spacing below each paragraph */
+        display: inline-block; /* Ensure links stack properly if needed */
+        margin-top: 5px;
+        color: grey;
+        text-decoration: underline;
+    }
+</style>
 @code {
     private string? errorMessage;
 
