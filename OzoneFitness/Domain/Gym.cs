@@ -7,6 +7,6 @@ public class Gym : BaseDomainBooking
     public string OperatingHours { get; set; }
     public int Capacity { get; set; }
 
-    public ICollection<Trainer> Trainers { get; set; }
-    public ICollection<Customer> Customers { get; set; }
+    //public ICollection<Trainer> Trainers { get; set; }
+    //public ICollection<Customer> Customers { get; set; }
 }

@@ -8,7 +8,7 @@ public class Trainer : BaseDomainBooking
     public int YearsOfExperience { get; set; }
 
     public int GymId { get; set; }
-    public Gym Gym { get; set; }
-    public ICollection<Schedule> Schedules { get; set; }
-    public ICollection<Feedback> Feedbacks { get; set; }
+    //public Gym Gym { get; set; }
+    //public ICollection<Schedule> Schedules { get; set; }
+    //public ICollection<Feedback> Feedbacks { get; set; }
 }

@@ -8,8 +8,8 @@ public class Feedback : BaseDomainBooking
     public DateTime DateOfSubmission { get; set; }
 
     public int TrainerId { get; set; }
-    public Trainer Trainer { get; set; }
+    //public Trainer Trainer { get; set; }
 
     public int CustomerId { get; set; }
-    public Customer Customer { get; set; }
+    //public Customer Customer { get; set; }
 }

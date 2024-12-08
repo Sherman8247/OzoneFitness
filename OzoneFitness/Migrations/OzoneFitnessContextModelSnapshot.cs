@@ -263,8 +263,6 @@ namespace OzoneFitness.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("Booking");
                 });
 
@@ -292,9 +290,6 @@ namespace OzoneFitness.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GymId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MembershipStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -308,8 +303,6 @@ namespace OzoneFitness.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GymId");
-
                     b.ToTable("Customer");
 
                     b.HasData(
@@ -318,8 +311,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(8818),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(8830),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(2991),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3002),
                             Email = "Jonas@gmail.com",
                             MembershipStatus = "Member",
                             Name = "Jonas",
@@ -330,8 +323,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(8833),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(8833),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3004),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3005),
                             Email = "Sherman@gmail.com",
                             MembershipStatus = "Nil",
                             Name = "Sherman",
@@ -379,10 +372,6 @@ namespace OzoneFitness.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("TrainerId");
 
                     b.ToTable("Feedback");
                 });
@@ -432,8 +421,8 @@ namespace OzoneFitness.Migrations
                             Address = "Pasir ris Mall",
                             Capacity = 150,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9036),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9036),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3176),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3177),
                             GymId = 0,
                             OperatingHours = "12",
                             UpdatedBy = "System"
@@ -444,8 +433,8 @@ namespace OzoneFitness.Migrations
                             Address = "Tampines Mall",
                             Capacity = 200,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9038),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9038),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179),
                             GymId = 0,
                             OperatingHours = "10",
                             UpdatedBy = "System"
@@ -494,8 +483,6 @@ namespace OzoneFitness.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainerId");
-
                     b.ToTable("Schedule");
                 });
 
@@ -538,8 +525,6 @@ namespace OzoneFitness.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GymId");
-
                     b.ToTable("Trainer");
 
                     b.HasData(
@@ -548,8 +533,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             ContactInfo = "12345678",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9215),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9215),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3265),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3266),
                             GymId = 0,
                             Name = "Mr Goh",
                             TrainerId = 0,
@@ -561,8 +546,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             ContactInfo = "87654321",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9217),
-                            DateUpdated = new DateTime(2024, 12, 8, 2, 51, 38, 467, DateTimeKind.Local).AddTicks(9218),
+                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3267),
+                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3268),
                             GymId = 0,
                             Name = "Mr Tang",
                             TrainerId = 0,
@@ -620,82 +605,6 @@ namespace OzoneFitness.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Booking", b =>
-                {
-                    b.HasOne("OzoneFitness.Domain.Customer", null)
-                        .WithMany("Bookings")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Customer", b =>
-                {
-                    b.HasOne("OzoneFitness.Domain.Gym", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("GymId");
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Feedback", b =>
-                {
-                    b.HasOne("OzoneFitness.Domain.Customer", "Customer")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OzoneFitness.Domain.Trainer", "Trainer")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Trainer");
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Schedule", b =>
-                {
-                    b.HasOne("OzoneFitness.Domain.Trainer", null)
-                        .WithMany("Schedules")
-                        .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Trainer", b =>
-                {
-                    b.HasOne("OzoneFitness.Domain.Gym", "Gym")
-                        .WithMany("Trainers")
-                        .HasForeignKey("GymId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gym");
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Customer", b =>
-                {
-                    b.Navigation("Bookings");
-
-                    b.Navigation("Feedbacks");
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Gym", b =>
-                {
-                    b.Navigation("Customers");
-
-                    b.Navigation("Trainers");
-                });
-
-            modelBuilder.Entity("OzoneFitness.Domain.Trainer", b =>
-                {
-                    b.Navigation("Feedbacks");
-
-                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

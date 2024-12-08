@@ -7,6 +7,6 @@ public class Customer : BaseDomainBooking
     public string Email { get; set; }
     public string MembershipStatus { get; set; }
 
-    public ICollection<Feedback> Feedbacks { get; set; }
-    public ICollection<Booking> Bookings { get; set; }
+    //public ICollection<Feedback> Feedbacks { get; set; }
+    //public ICollection<Booking> Bookings { get; set; }
 }
