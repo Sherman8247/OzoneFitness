@@ -15,6 +15,29 @@
 <h1>Register confirmation</h1>
 
 <StatusMessage Message="@statusMessage" />
+<style>
+    body {
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    p {
+        color: dimgrey;
+    }
+
+    h1 {
+        color: grey;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        margin-bottom: 20px; /* Add spacing below the header */
+    }
+
+    
+</style>
 
 @if (emailConfirmationLink is not null)
 {
