@@ -1,8 +1,6 @@
 ﻿@page "/Account/Login"
-@page "/BookingPages"
 
 @using System.ComponentModel.DataAnnotations
-@* @using Microsoft.AspNetCore.Authentication *@
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Identity
 @using OzoneFitness.Data
@@ -148,8 +146,8 @@
         if (result.Succeeded)
         {
             Logger.LogInformation("User logged in.");
-            // Redirect to a new page after successful login
-            NavigationManager.NavigateTo("/NavMenu"); // Replace with the page URL you want to navigate to
+            // Redirect to the /customers page after successful login
+            NavigationManager.NavigateTo("/LoginHome"); // Changed to /LoginHome
         }
         else if (result.RequiresTwoFactor)
         {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Page</title>
+    <title>Customer Navigation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
             margin: 0;
         }
 
-        .booking-container {
+        .nav-container {
             background-color: hotpink;
             padding: 20px;
             border-radius: 10px;
@@ -25,22 +25,13 @@
             text-align: center;
         }
 
-            .booking-container h3 {
+            .nav-container h3 {
                 margin-bottom: 20px;
                 font-size: 24px;
                 color: #333;
             }
 
-            .booking-container input, .booking-container select {
-                width: 100%;
-                padding: 10px;
-                margin: 10px 0;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: 16px;
-            }
-
-            .booking-container button {
+            .nav-container button {
                 width: 100%;
                 padding: 10px;
                 background-color: lawngreen;
@@ -52,65 +43,35 @@
                 transition: background-color 0.3s ease;
             }
 
-                .booking-container button:hover {
+                .nav-container button:hover {
                     background-color: #0056b3;
                 }
 
-            .booking-container p {
+            .nav-container p {
                 margin-top: 10px;
                 font-size: 14px;
             }
 
-                .booking-container p a {
+                .nav-container p a {
                     color: #007BFF;
                     text-decoration: none;
                 }
 
-                    .booking-container p a:hover {
+                    .nav-container p a:hover {
                         text-decoration: underline;
                     }
     </style>
 </head>
 
-<div class="booking-container">
-    <h3>Book Your Slot</h3>
-    <EditForm Model="@bookingModel" OnValidSubmit="HandleBooking">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <input type="text" @bind="bookingModel.Name" placeholder="Full Name" required />
-        <input type="email" @bind="bookingModel.Email" placeholder="Email" required />
-        <input type="date" @bind="bookingModel.Date" required />
-        <select @bind="bookingModel.TimeSlot" required>
-            <option value="">Select Time Slot</option>
-            <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
-            <option value="afternoon">Afternoon (1:00 PM - 4:00 PM)</option>
-            <option value="evening">Evening (5:00 PM - 8:00 PM)</option>
-        </select>
-        <button type="submit">Confirm Booking</button>
-    </EditForm>
-    <p>Want to change details? <a href="/booking">Update here</a></p>
+<div class="nav-container">
+    <h3>Welcome to Ozone Gym</h3>
+    <button @onclick="NavigateToCustomers">Go to Customers</button>
 </div>
 
 @code {
-    private BookingModel bookingModel = new BookingModel();
-
-    private async Task HandleBooking()
+    private void NavigateToCustomers()
     {
-        // Add your booking logic here
-        // For example, call an API or service to submit the booking
-        Console.WriteLine($"Booking confirmed for {bookingModel.Name} at {bookingModel.TimeSlot} on {bookingModel.Date}");
-
-        // After successful booking, you can redirect if needed or show a confirmation message
-        Navigation.NavigateTo("/confirmation");
-    }
-
-    public class BookingModel
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public DateTime Date { get; set; }
-        public string TimeSlot { get; set; }
+        // Navigate to the customers page
+        Navigation.NavigateTo("/customers");
     }
 }
-

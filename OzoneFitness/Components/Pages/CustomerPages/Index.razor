@@ -5,13 +5,26 @@
 @using OzoneFitness.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Customer Management - Ozone Gym</PageTitle>
 
-<h1>Index</h1>
+<!-- Top Navigation Bar -->
+<div class="top-bar">
+    <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/Account/Login" class="button">Login</a>
+    </nav>
+</div>
+
+<!-- Customer Management Content -->
+<h1>Customer Management</h1>
 
 <p>
-    <a href="customers/create">Create New</a>
+    <a href="customers/create">Create New Customer</a>
 </p>
 
 <QuickGrid Class="table" Items="context.Customer">
@@ -31,13 +44,18 @@
     </TemplateColumn>
 </QuickGrid>
 
+<!-- Footer or Additional Content if Needed -->
+<p>Start your journey today! <a href="/">Back to Home</a></p>
+
 @code {
     private OzoneFitnessContext context = default!;
 
+    // On page initialization, load the context.
     protected override void OnInitialized()
     {
         context = DbFactory.CreateDbContext();
     }
 
+    // Dispose async on cleanup.
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }
