@@ -35,10 +35,15 @@
 
 @code {
     private OzoneFitnessContext context = default!;
+    private List<Customer> customers = new List<Customer>();
+    private List<Schedule> schedules = new List<Schedule>();
 
     protected override void OnInitialized()
     {
+        // Initialize context for database access
         context = DbFactory.CreateDbContext();
+
+
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();

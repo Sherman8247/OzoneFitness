@@ -1,43 +1,76 @@
 ﻿@page "/trainers"
 @using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.AspNetCore.Components.Forms
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Trainers - Ozone Gym</PageTitle>
 
-<h1>Index</h1>
+<div class="top-bar">
+    <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="LoginHome" class="button">Back</a>
+    </nav>
+</div>
 
+<h1>Trainers List</h1>
+
+<!-- Create New Trainer Link -->
 <p>
-    <a href="trainers/create">Create New</a>
+    <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Trainer">
-    <PropertyColumn Property="trainer => trainer.TrainerId" />
-    <PropertyColumn Property="trainer => trainer.Name" />
-    <PropertyColumn Property="trainer => trainer.ContactInfo" />
-    <PropertyColumn Property="trainer => trainer.YearsOfExperience" />
-    <PropertyColumn Property="trainer => trainer.GymId" />
-    <PropertyColumn Property="trainer => trainer.DateCreated" />
-    <PropertyColumn Property="trainer => trainer.DateUpdated" />
-    <PropertyColumn Property="trainer => trainer.CreatedBy" />
-    <PropertyColumn Property="trainer => trainer.UpdatedBy" />
-
-    <TemplateColumn Context="trainer">
-        <a href="@($"trainers/edit?id={trainer.Id}")">Edit</a> |
-        <a href="@($"trainers/details?id={trainer.Id}")">Details</a> |
-        <a href="@($"trainers/delete?id={trainer.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<!-- Trainers Table -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Trainer ID</th>
+            <th>Name</th>
+            <th>Contact Info</th>
+            <th>Years of Experience</th>
+            <th>Gym</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainer in trainers)
+        {
+            <tr>
+                <td>@trainer.TrainerId</td>
+                <td>@trainer.Name</td>
+                <td>@trainer.ContactInfo</td>
+                <td>@trainer.YearsOfExperience</td>
+                <td>@trainer.GymId</td>
+                <td>@trainer.DateCreated.ToShortDateString()</td>
+                <td>@trainer.DateUpdated.ToShortDateString()</td>
+                <td>
+                    <a href="@($"trainers/edit?id={trainer.TrainerId}")" class="btn btn-primary btn-sm">Edit</a> |
+                    <a href="@($"trainers/details?id={trainer.TrainerId}")" class="btn btn-info btn-sm">Details</a> |
+                    <a href="@($"trainers/delete?id={trainer.TrainerId}")" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     private OzoneFitnessContext context = default!;
+    private List<Trainer> trainers = new List<Trainer>(); // List to hold trainers
 
     protected override void OnInitialized()
     {
+        // Initialize context for database access
         context = DbFactory.CreateDbContext();
+
+        // Load trainers from the database
+        trainers = context.Trainer.ToList(); // Ensure Trainers DbSet is properly defined in your context
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();

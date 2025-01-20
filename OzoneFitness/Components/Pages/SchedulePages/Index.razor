@@ -6,29 +6,38 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Schedule Management - Ozone Gym</PageTitle>
 
-<h1>Index</h1>
+<div class="top-bar">
+    <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="LoginHome" class="button">Back</a>
+    </nav>
+</div>
+
+<h1>Schedule</h1>
 
 <p>
-    <a href="schedules/create">Create New</a>
+    <a href="schedules/create">Create New Schedule</a>
 </p>
 
 <QuickGrid Class="table" Items="context.Schedule">
     <PropertyColumn Property="schedule => schedule.ScheduleId" />
     <PropertyColumn Property="schedule => schedule.DayOfWeek" />
-    <PropertyColumn Property="schedule => schedule.StartTime" />
-    <PropertyColumn Property="schedule => schedule.EndTime" />
+    <PropertyColumn Property="schedule => schedule.StartTime" Title="Start Time" />
+    <PropertyColumn Property="schedule => schedule.EndTime" Title="End Time" />
     <PropertyColumn Property="schedule => schedule.TrainerId" />
-    <PropertyColumn Property="schedule => schedule.DateCreated" />
-    <PropertyColumn Property="schedule => schedule.DateUpdated" />
-    <PropertyColumn Property="schedule => schedule.CreatedBy" />
-    <PropertyColumn Property="schedule => schedule.UpdatedBy" />
+    <PropertyColumn Property="schedule => schedule.DateCreated" Title="Date Created" />
+    <PropertyColumn Property="schedule => schedule.DateUpdated" Title="Date Updated" />
+    <PropertyColumn Property="schedule => schedule.CreatedBy" Title="Created By" />
+    <PropertyColumn Property="schedule => schedule.UpdatedBy" Title="Updated By" />
 
     <TemplateColumn Context="schedule">
-        <a href="@($"schedules/edit?id={schedule.Id}")">Edit</a> |
-        <a href="@($"schedules/details?id={schedule.Id}")">Details</a> |
-        <a href="@($"schedules/delete?id={schedule.Id}")">Delete</a>
+        <a href="@($"schedules/edit?id={schedule.ScheduleId}")">Edit</a> |
+        <a href="@($"schedules/details?id={schedule.ScheduleId}")">Details</a> |
+        <a href="@($"schedules/delete?id={schedule.ScheduleId}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 
@@ -37,6 +46,7 @@
 
     protected override void OnInitialized()
     {
+        // Initialize context for database access
         context = DbFactory.CreateDbContext();
     }
 

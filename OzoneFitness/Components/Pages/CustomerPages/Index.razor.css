@@ -1,25 +1,20 @@
-﻿/* Ensure html and body take up full height */
-html, body {
-    height: 100%; /* Make sure the body fills the entire screen */
-    margin: 0; /* Remove any default margin */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: black; /* Black background for the page */
-    color: white; /* Default text color */
-}
-
-/* Top bar with sticky positioning */
-.top-bar {
+﻿﻿.top-bar {
     position: sticky;
     top: 0;
     margin: 0;
-    padding: 10px 20px;
-    background-color: #333; /* Dark gray background for the top bar */
+    padding: 10px 20px; /* Ensure the padding doesn't push it down */
+    background-color: #333;
+}
+
+
+.top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #333; /* Dark gray background for the top bar */
+    padding: 10px 20px;
+    position: sticky; /* Sticks the top bar at the top on scroll */
+    top: 0;
     z-index: 1000; /* Ensures it stays above other elements */
 }
 
@@ -40,8 +35,9 @@ body {
             text-decoration: none;
             font-size: 16px;
             transition: color 0.3s ease;
-            line-height: 40px;
-            padding: 0 5px;
+            line-height: 40px; /* Matches the height of the button */
+            padding: 0 5px; /* Optional: Add horizontal padding for spacing */
+            display: inline-block; /* Ensures proper alignment with flexbox */
         }
 
             .top-bar .nav-links a:hover {
@@ -63,32 +59,30 @@ body {
             background-color: #D03670; /* Darker pink on hover */
         }
 
-/* Main content */
 h1 {
-    font-size: 2.5rem;
-    letter-spacing: 0.2em;
-    word-spacing: 0.5em;
-    line-height: 1.5;
-    text-align: center;
-    font-weight: bold;
-    margin: 20px 0;
-    color: white; /* White text color */
+    font-size: 2.5rem; /* Adjust font size if needed */
+    letter-spacing: 0.2em; /* Add spacing between individual letters */
+    word-spacing: 0.5em; /* Add spacing between words */
+    line-height: 1.5; /* Adjust line spacing for multi-line text */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Ensure bold styling */
+    margin: 20px 0; /* Adjust vertical spacing */
+    color: white; /* Text color (customize to your design) */
 }
 
 /* Styling for "No Pain, No Gain!" */
 p.tagline {
-    font-size: 1.5rem;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    letter-spacing: 0.1em;
-    word-spacing: 0.3em;
-    text-shadow: 2px 2px 5px red;
-    margin-top: 20px;
+    font-size: 1.5rem; /* Make the text larger */
+    font-style: italic; /* Add emphasis with italic style */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the text */
+    color: white; /* Use an appealing color (purple in this case) */
+    letter-spacing: 0.1em; /* Slightly spread the letters */
+    word-spacing: 0.3em; /* Add some spacing between words */
+    text-shadow: 2px 2px 5px red; /* Add a subtle shadow for depth */
+    margin-top: 20px; /* Add spacing above the text */
 }
 
-/* Button styling */
 .button {
     background-color: hotpink;
     border-radius: 8px;
@@ -114,4 +108,11 @@ p.tagline {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black; /* Black background for the page */
+    color: white; /* Default text color */
 }
