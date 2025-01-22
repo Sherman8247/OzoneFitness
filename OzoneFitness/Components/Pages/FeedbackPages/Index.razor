@@ -8,13 +8,69 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<div class="top-bar">
+    <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/aboutus">About</a>
+        <a href="/contacts">Contact</a>
+        <a href="/customers">Customer Page</a>
+        <a href="/trainers">Trainers Page</a>
+        <a href="/schedules">Schedule Page</a>
+        <a href="/feedbacks">Feedback Page</a>
+        <a href="LoginHome" class="button">Back</a>
+    </nav>
+</div>
+
+<body>
+</body>
+<link rel="stylesheet" href="css/Index.Razor.css">
+
+<style>
+    /* Add styles for the feedback table */
+    .feedback-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .feedback-table th, .feedback-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .feedback-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .feedback-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .feedback-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .feedback-table a {
+            color: #4CAF50;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+            .feedback-table a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+
+<h1>Feedbacks</h1>
 
 <p>
     <a href="feedbacks/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Feedback">
+<QuickGrid Class="feedback-table" Items="context.Feedback">
     <PropertyColumn Property="feedback => feedback.FeedbackId" />
     <PropertyColumn Property="feedback => feedback.Rating" />
     <PropertyColumn Property="feedback => feedback.Comments" />
@@ -27,9 +83,9 @@
     <PropertyColumn Property="feedback => feedback.UpdatedBy" />
 
     <TemplateColumn Context="feedback">
-        <a href="@($"feedbacks/edit?id={feedback.Id}")">Edit</a> |
-        <a href="@($"feedbacks/details?id={feedback.Id}")">Details</a> |
-        <a href="@($"feedbacks/delete?id={feedback.Id}")">Delete</a>
+        <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")">Edit</a> |
+        <a href="@($"feedbacks/details?id={feedback.FeedbackId}")">Details</a> |
+        <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")">Delete</a>
     </TemplateColumn>
 </QuickGrid>
 

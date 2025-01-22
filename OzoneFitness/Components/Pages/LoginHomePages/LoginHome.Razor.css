@@ -65,7 +65,7 @@ h1 {
     word-spacing: 0.5em; /* Add spacing between words */
     line-height: 1.5; /* Adjust line spacing for multi-line text */
     text-align: center; /* Center the text */
-    font-weight: bold; /* Ensure bo ld styling */
+    font-weight: bold; /* Ensure bold styling */
     margin: 20px 0; /* Adjust vertical spacing */
     color: white; /* Text color (customize to your design) */
 }
@@ -109,8 +109,6 @@ p.tagline {
     -webkit-user-select: none;
     touch-action: manipulation;
 }
-
-
 
 body {
     margin: 0;

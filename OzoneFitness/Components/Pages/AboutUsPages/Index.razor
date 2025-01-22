@@ -1,0 +1,36 @@
+﻿@page "/aboutus"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using OzoneFitness.Domain
+@using OzoneFitness.Data
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<div class="top-bar">
+    <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/aboutus">About</a>
+        <a href="/contacts">Contact</a>
+        <a href="/customers">Customer Page</a>
+        <a href="/trainers">Trainers Page</a>
+        <a href="/schedules">Schedule Page</a>
+        <a href="/feedbacks">Feedback Page</a>
+        <a href="LoginHome" class="button">Back</a>
+    </nav>
+</div>
+
+<h1>Ozone Gym</h1>
+
+<p class="tagline">No Pain, No Gain! Start your journeys today!</p>
+
+<p>
+    Ozone Fitness Gym is the gym that aims to bring everyone their inner fire and desire for the perfect body of everyone's own dream. We offer to you the best certified trainers around the world.
+</p>
+
+<body>
+</body>
+<link rel="stylesheet" href="css/Index.Razor.css">
+@code {
+
+}
