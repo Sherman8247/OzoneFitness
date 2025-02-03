@@ -9,6 +9,8 @@
 
 <PageTitle>Trainers - Ozone Gym</PageTitle>
 
+<link rel="stylesheet" href="css/Index.razor.css">
+
 <div class="top-bar">
     <h1 class="logo">Ozone Gym</h1>
     <nav class="nav-links">
@@ -22,51 +24,47 @@
     </nav>
 </div>
 
-<body>
-</body>
-<link rel="stylesheet" href="css/Index.Razor.css">
+<div class="container">
+    <h1>Trainers List</h1>
 
-<h1>Trainers List</h1>
+    <p>
+        <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
+    </p>
 
-<!-- Create New Trainer Link -->
-<p>
-    <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
-</p>
-
-<!-- Trainers Table -->
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Trainer ID</th>
-            <th>Name</th>
-            <th>Contact Info</th>
-            <th>Years of Experience</th>
-            <th>Gym</th>
-            <th>Date Created</th>
-            <th>Date Updated</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var trainer in trainers)
-        {
+    <table class="table table-striped trainers-table">
+        <thead>
             <tr>
-                <td>@trainer.TrainerId</td>
-                <td>@trainer.Name</td>
-                <td>@trainer.ContactInfo</td>
-                <td>@trainer.YearsOfExperience</td>
-                <td>@trainer.GymId</td>
-                <td>@trainer.DateCreated.ToShortDateString()</td>
-                <td>@trainer.DateUpdated.ToShortDateString()</td>
-                <td>
-                    <a href="@($"trainers/edit?id={trainer.TrainerId}")" class="btn btn-primary btn-sm">Edit</a> |
-                    <a href="@($"trainers/details?id={trainer.TrainerId}")" class="btn btn-info btn-sm">Details</a> |
-                    <a href="@($"trainers/delete?id={trainer.TrainerId}")" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <th>Trainer ID</th>
+                <th>Name</th>
+                <th>Contact Info</th>
+                <th>Years of Experience</th>
+                <th>Gym</th>
+                <th>Date Created</th>
+                <th>Date Updated</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var trainer in trainers)
+            {
+                <tr>
+                    <td>@trainer.TrainerId</td>
+                    <td>@trainer.Name</td>
+                    <td>@trainer.ContactInfo</td>
+                    <td>@trainer.YearsOfExperience</td>
+                    <td>@trainer.GymId</td>
+                    <td>@trainer.DateCreated.ToShortDateString()</td>
+                    <td>@trainer.DateUpdated.ToShortDateString()</td>
+                    <td>
+                        <a href="@($"trainers/edit?id={trainer.TrainerId}")" class="btn btn-primary btn-sm">Edit</a> |
+                        <a href="@($"trainers/details?id={trainer.TrainerId}")" class="btn btn-info btn-sm">Details</a> |
+                        <a href="@($"trainers/delete?id={trainer.TrainerId}")" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code {
     private OzoneFitnessContext context = default!;
