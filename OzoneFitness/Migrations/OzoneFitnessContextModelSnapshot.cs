@@ -47,6 +47,20 @@ namespace OzoneFitness.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -85,6 +99,11 @@ namespace OzoneFitness.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -137,6 +156,10 @@ namespace OzoneFitness.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -199,6 +222,13 @@ namespace OzoneFitness.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -311,8 +341,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3595),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3645),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(1919),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(1929),
                             Email = "Jonas@gmail.com",
                             MembershipStatus = "Member",
                             Name = "Jonas",
@@ -323,8 +353,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3666),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3668),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(1933),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(1933),
                             Email = "Sherman@gmail.com",
                             MembershipStatus = "Nil",
                             Name = "Sherman",
@@ -421,8 +451,8 @@ namespace OzoneFitness.Migrations
                             Address = "Pasir ris Mall",
                             Capacity = 150,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4414),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4416),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2126),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2127),
                             GymId = 0,
                             OperatingHours = "12",
                             UpdatedBy = "System"
@@ -433,8 +463,8 @@ namespace OzoneFitness.Migrations
                             Address = "Tampines Mall",
                             Capacity = 200,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4421),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4422),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2128),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2129),
                             GymId = 0,
                             OperatingHours = "10",
                             UpdatedBy = "System"
@@ -533,8 +563,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             ContactInfo = "12345678",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4958),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4960),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2215),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2216),
                             GymId = 0,
                             Name = "Mr Goh",
                             TrainerId = 0,
@@ -546,13 +576,46 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             ContactInfo = "87654321",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4964),
-                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4965),
+                            DateCreated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2217),
+                            DateUpdated = new DateTime(2025, 2, 5, 20, 50, 15, 258, DateTimeKind.Local).AddTicks(2217),
                             GymId = 0,
                             Name = "Mr Tang",
                             TrainerId = 0,
                             UpdatedBy = "System",
                             YearsOfExperience = 8
+                        });
+                });
+
+            modelBuilder.Entity("OzoneFitness.Data.OzoneFitnessUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("OzoneFitnessUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7dcd94aa-7393-4f09-99cd-44bd84f57cb6",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHM5kyr71JOmrfc/fIS363kUFECq6+K8kri7smfjl8Dj+jetaoo5Sag5VYIsSyX68A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0fe770f2-3cbf-4cfb-8c38-d016caf714db",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com",
+                            FirstName = "Admin",
+                            LastName = "User"
                         });
                 });
 

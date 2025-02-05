@@ -21,6 +21,9 @@ namespace OzoneFitness.Data
             Builder.ApplyConfiguration(new CustomerID());
             Builder.ApplyConfiguration(new GymID());
             Builder.ApplyConfiguration(new TrainerID());
+            Builder.ApplyConfiguration(new RoleSeed());
+            Builder.ApplyConfiguration(new UserRoleSeed());
+            Builder.ApplyConfiguration(new UserSeed());
         }
     }
 }
