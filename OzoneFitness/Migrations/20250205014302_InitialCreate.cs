@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OzoneFitness.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentitySeeds : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -289,8 +289,8 @@ namespace OzoneFitness.Migrations
                 columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Email", "MembershipStatus", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", 0, new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(2991), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3002), "Jonas@gmail.com", "Member", "Jonas", "System" },
-                    { 2, "System", 0, new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3004), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3005), "Sherman@gmail.com", "Nil", "Sherman", "System" }
+                    { 1, "System", 0, new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3595), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3645), "Jonas@gmail.com", "Member", "Jonas", "System" },
+                    { 2, "System", 0, new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3666), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3668), "Sherman@gmail.com", "Nil", "Sherman", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -298,8 +298,8 @@ namespace OzoneFitness.Migrations
                 columns: new[] { "Id", "Address", "Capacity", "CreatedBy", "DateCreated", "DateUpdated", "GymId", "OperatingHours", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "Pasir ris Mall", 150, "System", new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3176), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3177), 0, "12", "System" },
-                    { 2, "Tampines Mall", 200, "System", new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179), 0, "10", "System" }
+                    { 1, "Pasir ris Mall", 150, "System", new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4414), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4416), 0, "12", "System" },
+                    { 2, "Tampines Mall", 200, "System", new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4421), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4422), 0, "10", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -307,8 +307,8 @@ namespace OzoneFitness.Migrations
                 columns: new[] { "Id", "ContactInfo", "CreatedBy", "DateCreated", "DateUpdated", "GymId", "Name", "TrainerId", "UpdatedBy", "YearsOfExperience" },
                 values: new object[,]
                 {
-                    { 1, "12345678", "System", new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3265), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3266), 0, "Mr Goh", 0, "System", 12 },
-                    { 2, "87654321", "System", new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3267), new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3268), 0, "Mr Tang", 0, "System", 8 }
+                    { 1, "12345678", "System", new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4958), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4960), 0, "Mr Goh", 0, "System", 12 },
+                    { 2, "87654321", "System", new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4964), new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4965), 0, "Mr Tang", 0, "System", 8 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using OzoneFitness.Data;
 namespace OzoneFitness.Migrations
 {
     [DbContext(typeof(OzoneFitnessContext))]
-    [Migration("20241208081815_IdentitySeeds")]
-    partial class IdentitySeeds
+    [Migration("20250205014302_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,8 +314,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(2991),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3002),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3595),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3645),
                             Email = "Jonas@gmail.com",
                             MembershipStatus = "Member",
                             Name = "Jonas",
@@ -326,8 +326,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3004),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3005),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3666),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(3668),
                             Email = "Sherman@gmail.com",
                             MembershipStatus = "Nil",
                             Name = "Sherman",
@@ -424,8 +424,8 @@ namespace OzoneFitness.Migrations
                             Address = "Pasir ris Mall",
                             Capacity = 150,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3176),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3177),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4414),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4416),
                             GymId = 0,
                             OperatingHours = "12",
                             UpdatedBy = "System"
@@ -436,8 +436,8 @@ namespace OzoneFitness.Migrations
                             Address = "Tampines Mall",
                             Capacity = 200,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3179),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4421),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4422),
                             GymId = 0,
                             OperatingHours = "10",
                             UpdatedBy = "System"
@@ -536,8 +536,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             ContactInfo = "12345678",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3265),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3266),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4958),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4960),
                             GymId = 0,
                             Name = "Mr Goh",
                             TrainerId = 0,
@@ -549,8 +549,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             ContactInfo = "87654321",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3267),
-                            DateUpdated = new DateTime(2024, 12, 8, 16, 18, 15, 435, DateTimeKind.Local).AddTicks(3268),
+                            DateCreated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4964),
+                            DateUpdated = new DateTime(2025, 2, 5, 9, 43, 1, 11, DateTimeKind.Local).AddTicks(4965),
                             GymId = 0,
                             Name = "Mr Tang",
                             TrainerId = 0,
