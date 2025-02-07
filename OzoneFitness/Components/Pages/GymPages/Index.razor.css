@@ -51,19 +51,34 @@ body {
                 color: #fff;
             }
 
-/* Container for general padding */
+    .top-bar .login-button {
+        background-color: #EA4C89;
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .top-bar .login-button:hover {
+            background-color: #D03670;
+        }
+
+/* Main container styling */
 .container {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Table styling */
+/* Other existing styles */
 .table {
-    width: 100%;
-    border-collapse: collapse;
     background-color: #222; /* Dark gray for the table */
     color: white; /* White text for readability */
+    border-collapse: collapse;
+    width: 100%;
     margin: 20px auto;
 }
 
@@ -71,6 +86,7 @@ body {
         border: 1px solid #444; /* Border color for table cells */
         padding: 10px;
         text-align: left;
+        color: white;
     }
 
     .table th {
@@ -80,12 +96,70 @@ body {
 
     .table tr:nth-child(even) {
         background-color: #292929; /* Alternate row color */
+        color: white;
     }
 
     .table tr:hover {
         background-color: #444; /* Highlighted row on hover */
         color: white;
     }
+
+/* Trainer profile section */
+.trainers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    color: white;
+}
+
+.trainer-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+}
+
+    .trainer-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .trainer-card img {
+        width: 100%;
+        border-radius: 10px;
+        height: auto;
+    }
+
+    .trainer-card h3 {
+        margin: 10px 0 5px;
+        color: #EA4C89;
+    }
+
+    .trainer-card p {
+        font-size: 14px;
+        color: #ccc;
+    }
+
+    .trainer-card button {
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #EA4C89;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .trainer-card button:hover {
+            background-color: #D03670;
+        }
 
 /* Button styling */
 .btn {
@@ -108,11 +182,18 @@ body {
     background-color: #4BBF73; /* Green for info buttons */
 }
 
+    .btn-info:hover {
+        background-color: #399a59;
+    }
+
 .btn-danger {
     background-color: #E74C3C; /* Red for danger buttons */
 }
 
-/* Main heading styling */
+    .btn-danger:hover {
+        background-color: #C0392B;
+    }
+
 h1 {
     font-size: 2.5rem; /* Adjust font size if needed */
     letter-spacing: 0.2em; /* Add spacing between individual letters */

@@ -7,7 +7,9 @@
 <PageTitle>Details</PageTitle>
 
 <h1>Details</h1>
+<body>
 
+</body>
 <div>
     <h2>Customer</h2>
     <hr />
@@ -50,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        customer = await context.Customer.FirstOrDefaultAsync(m => m.Id == ID);
+        customer = await context.Customer.FirstOrDefaultAsync(m => m.CustomerId == ID);
 
         if (customer is null)
         {
