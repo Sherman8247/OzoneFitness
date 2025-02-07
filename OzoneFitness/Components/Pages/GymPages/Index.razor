@@ -1,6 +1,5 @@
 ﻿@page "/gyms"
 @using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.QuickGrid
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
 @implements IAsyncDisposable
@@ -8,36 +7,77 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Index</h1>
+<div class="top-bar">
+    <a href="/LoginHome" class="logo">Ozone Gym</a>
+    <nav class="nav-links">
+        <a href="/aboutus">About</a>
+        <a href="/contacts">Contact</a>
+        <a href="/gyms">Gym Outlet</a>
+        <a href="/customers">Customer Page</a>
+        <a href="/trainers">Trainers Page</a>
+        <a href="/schedules">Schedule Page</a>
+        <a href="/feedbacks">Feedback Page</a>
+    </nav>
+</div>
+
+<body>
+</body>
+
+<h1>Gym Listings</h1>
 
 <p>
     <a href="gyms/create">Create New</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Gym">
-    <PropertyColumn Property="gym => gym.GymId" />
-    <PropertyColumn Property="gym => gym.Address" />
-    <PropertyColumn Property="gym => gym.OperatingHours" />
-    <PropertyColumn Property="gym => gym.Capacity" />
-    <PropertyColumn Property="gym => gym.DateCreated" />
-    <PropertyColumn Property="gym => gym.DateUpdated" />
-    <PropertyColumn Property="gym => gym.CreatedBy" />
-    <PropertyColumn Property="gym => gym.UpdatedBy" />
-
-    <TemplateColumn Context="gym">
-        <a href="@($"gyms/edit?id={gym.Id}")">Edit</a> |
-        <a href="@($"gyms/details?id={gym.Id}")">Details</a> |
-        <a href="@($"gyms/delete?id={gym.Id}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<!-- Traditional HTML Table for Gym Listings -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Gym ID</th>
+            <th>Address</th>
+            <th>Operating Hours</th>
+            <th>Capacity</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Created By</th>
+            <th>Updated By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var gym in gyms)
+        {
+            <tr>
+                <td>@gym.GymId</td>
+                <td>@gym.Address</td>
+                <td>@gym.OperatingHours</td>
+                <td>@gym.Capacity</td>
+                <td>@gym.DateCreated.ToString("yyyy-MM-dd")</td>
+                <td>@gym.DateUpdated.ToString("yyyy-MM-dd")</td>
+                <td>@gym.CreatedBy</td>
+                <td>@gym.UpdatedBy</td>
+                <td>
+                    <a href="@($"gyms/edit?id={gym.GymId}")">Edit</a> |
+                    <a href="@($"gyms/details?id={gym.GymId}")">Details</a> |
+                    <a href="@($"gyms/delete?id={gym.GymId}")">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
-    private OzoneFitnessContext context = default!;
+    private List<Gym> gyms = new List<Gym>();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        context = DbFactory.CreateDbContext();
+        using var context = DbFactory.CreateDbContext();
+        gyms = await context.Gym.ToListAsync();
     }
 
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+    public async ValueTask DisposeAsync()
+    {
+        // Ensure context is disposed of when done
+        // No need for explicit disposal here since the context is used in a short-lived scope in OnInitializedAsync
+    }
 }

@@ -1,61 +1,87 @@
 ﻿@page "/schedules"
 @using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.AspNetCore.Components.Forms
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
 <PageTitle>Schedule Management - Ozone Gym</PageTitle>
 
 <div class="top-bar">
-    <h1 class="logo">Ozone Gym</h1>
+    <a href="/LoginHome" class="logo">Ozone Gym</a>
     <nav class="nav-links">
         <a href="/aboutus">About</a>
         <a href="/contacts">Contact</a>
+        <a href="/gyms">Gym Outlet</a>
         <a href="/customers">Customer Page</a>
         <a href="/trainers">Trainers Page</a>
         <a href="/schedules">Schedule Page</a>
         <a href="/feedbacks">Feedback Page</a>
-        <a href="LoginHome" class="button">Back</a>
     </nav>
 </div>
 
 <body>
 </body>
+
 <link rel="stylesheet" href="css/Index.Razor.css">
 
-<h1>Schedule</h1>
+<h1>Schedule Management</h1>
 
 <p>
-    <a href="schedules/create">Create New Schedule</a>
+    <a href="schedules/create" class="btn btn-success">Create New Schedule</a>
 </p>
 
-<QuickGrid Class="table" Items="context.Schedule">
-    <PropertyColumn Property="schedule => schedule.ScheduleId" />
-    <PropertyColumn Property="schedule => schedule.DayOfWeek" />
-    <PropertyColumn Property="schedule => schedule.StartTime" Title="Start Time" />
-    <PropertyColumn Property="schedule => schedule.EndTime" Title="End Time" />
-    <PropertyColumn Property="schedule => schedule.TrainerId" />
-    <PropertyColumn Property="schedule => schedule.DateCreated" Title="Date Created" />
-    <PropertyColumn Property="schedule => schedule.DateUpdated" Title="Date Updated" />
-    <PropertyColumn Property="schedule => schedule.CreatedBy" Title="Created By" />
-    <PropertyColumn Property="schedule => schedule.UpdatedBy" Title="Updated By" />
-
-    <TemplateColumn Context="schedule">
-        <a href="@($"schedules/edit?id={schedule.ScheduleId}")">Edit</a> |
-        <a href="@($"schedules/details?id={schedule.ScheduleId}")">Details</a> |
-        <a href="@($"schedules/delete?id={schedule.ScheduleId}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<table class="table table-striped schedules-table">
+    <thead>
+        <tr>
+            <th>Schedule ID</th>
+            <th>Day of Week</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Trainer ID</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Created By</th>
+            <th>Updated By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var schedule in schedules)
+        {
+            <tr>
+                <td>@schedule.ScheduleId</td>
+                <td>@schedule.DayOfWeek</td>
+                <td>@schedule.StartTime</td>
+                <td>@schedule.EndTime</td>
+                <td>@schedule.TrainerId</td>
+                <td>@(schedule.DateCreated?.ToShortDateString() ?? "N/A")</td>
+                <td>@(schedule.DateUpdated?.ToShortDateString() ?? "N/A")</td>
+                <td>@schedule.CreatedBy</td>
+                <td>@schedule.UpdatedBy</td>
+                <td>
+                    <a href="@($"schedules/edit?id={schedule.ScheduleId}")" class="btn btn-primary btn-sm">Edit</a> |
+                    <a href="@($"schedules/details?id={schedule.ScheduleId}")" class="btn btn-info btn-sm">Details</a> |
+                    <a href="@($"schedules/delete?id={schedule.ScheduleId}")" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     private OzoneFitnessContext context = default!;
+    private List<Schedule> schedules = new List<Schedule>();
 
     protected override void OnInitialized()
     {
         // Initialize context for database access
         context = DbFactory.CreateDbContext();
+
+        // Load schedules from the database
+        schedules = context.Schedule.ToList(); // Ensure Schedule DbSet is properly defined in your context
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();

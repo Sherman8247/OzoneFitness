@@ -1,66 +1,85 @@
-﻿    @page "/customers"
-    @using Microsoft.EntityFrameworkCore
-    @using Microsoft.AspNetCore.Components.QuickGrid
-    @using OzoneFitness.Domain
-    @using OzoneFitness.Data
-    @implements IAsyncDisposable
-    @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
-    @inject NavigationManager NavigationManager
+﻿@page "/customers"
+@using Microsoft.EntityFrameworkCore
+@using OzoneFitness.Domain
+@using OzoneFitness.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
-    <PageTitle>Customer Management - Ozone Gym</PageTitle>
+<PageTitle>Customer Management - Ozone Gym</PageTitle>
 
 <div class="top-bar">
     <a href="/LoginHome" class="logo">Ozone Gym</a>
     <nav class="nav-links">
         <a href="/aboutus">About</a>
         <a href="/contacts">Contact</a>
+        <a href="/gyms">Gym Outlet</a>
         <a href="/customers">Customer Page</a>
         <a href="/trainers">Trainers Page</a>
         <a href="/schedules">Schedule Page</a>
         <a href="/feedbacks">Feedback Page</a>
-        <a href="/LoginHome" class="button">Back</a>
     </nav>
 </div>
-    <body>
-    </body>
-    <link rel="stylesheet" href="css/Index.Razor.css">
 
-    <!-- Customer Management Content -->
-    <h1>Customer Management</h1>
+<body>
+</body>
 
-    <p>
-        <a href="customers/create">Create New Customer</a>
-    </p>
+<link rel="stylesheet" href="css/Index.Razor.css">
 
-    <QuickGrid Class="table" Items="context.Customer">
-        <PropertyColumn Property="customer => customer.CustomerId" />
-        <PropertyColumn Property="customer => customer.Name" />
-        <PropertyColumn Property="customer => customer.Email" />
-        <PropertyColumn Property="customer => customer.MembershipStatus" />
-        <PropertyColumn Property="customer => customer.DateCreated" />
-        <PropertyColumn Property="customer => customer.DateUpdated" />
-        <PropertyColumn Property="customer => customer.CreatedBy" />
-        <PropertyColumn Property="customer => customer.UpdatedBy" />
+<h1>Customer Management</h1>
 
-        <TemplateColumn Context="customer">
-            <a href="@($"customers/edit?id={customer.Id}")" class="btn btn-edit">Edit</a>
-            <a href="@($"customers/details?id={customer.Id}")" class="btn btn-details">Details</a> |
-            <a href="@($"customers/delete?id={customer.Id}")" class="btn btn-delete">Delete</a>
-        </TemplateColumn>
-    </QuickGrid>
+<p>
+    <a href="customers/create" class="btn btn-success">Create New Customer</a>
+</p>
 
-    <!-- Footer or Additional Content if Needed -->
-     <!-- <p>Start your journey today! <a href="/">Back to Home</a></p> -->
-
-    @code {
-        private OzoneFitnessContext context = default!;
-
-        // On page initialization, load the context.
-        protected override void OnInitialized()
+<table class="table table-striped customers-table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Membership Status</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+            <th>Created By</th>
+            <th>Updated By</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in customers)
         {
-            context = DbFactory.CreateDbContext();
+            <tr>
+                <td>@customer.CustomerId</td>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                <td>@customer.MembershipStatus</td>
+                <td>@customer.DateCreated.ToShortDateString()</td>
+                <td>@customer.DateUpdated.ToShortDateString()</td>
+                <td>@customer.CreatedBy</td>
+                <td>@customer.UpdatedBy</td>
+                <td>
+                    <a href="@($"customers/edit?id={customer.CustomerId}")" class="btn btn-primary btn-sm">Edit</a> |
+                    <a href="@($"customers/details?id={customer.CustomerId}")" class="btn btn-info btn-sm">Details</a> |
+                    <a href="@($"customers/delete?id={customer.CustomerId}")" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
         }
+    </tbody>
+</table>
 
-        // Dispose async on cleanup.
-        public async ValueTask DisposeAsync() => await context.DisposeAsync();
+@code {
+    private OzoneFitnessContext context = default!;
+    private List<Customer> customers = new List<Customer>(); // List to hold customers
+
+    protected override void OnInitialized()
+    {
+        // Initialize context for database access
+        context = DbFactory.CreateDbContext();
+
+        // Load customers from the database
+        customers = context.Customer.ToList(); // Ensure Customer DbSet is properly defined in your context
     }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

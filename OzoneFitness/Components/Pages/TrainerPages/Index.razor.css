@@ -65,11 +65,15 @@ body {
         .top-bar .login-button:hover {
             background-color: #D03670;
         }
+
+/* Main container styling */
 .container {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
+
+/* Other existing styles */
 .table {
     background-color: #222; /* Dark gray for the table */
     color: white; /* White text for readability */
@@ -78,51 +82,27 @@ body {
     margin: 20px auto;
 }
 
-.table th, .table td {
-    border: 1px solid #444; /* Border color for table cells */
-    padding: 10px;
-    text-align: left;
-    color: white;
-}
+    .table th, .table td {
+        border: 1px solid #444; /* Border color for table cells */
+        padding: 10px;
+        text-align: left;
+        color: white;
+    }
 
-.table th {
-    background-color: #333; /* Slightly darker gray for headers */
-    color: #EA4C89; /* Highlighted text for headers */
-}
+    .table th {
+        background-color: #333; /* Slightly darker gray for headers */
+        color: #EA4C89; /* Highlighted text for headers */
+    }
 
-.table tr:nth-child(even) {
-    background-color: #292929; /* Alternate row color */
-    color: white;
-}
+    .table tr:nth-child(even) {
+        background-color: #292929; /* Alternate row color */
+        color: white;
+    }
 
-.table tr:hover {
-    background-color: #444; /* Highlighted row on hover */
-    color: white;
-}
-/* Main heading styling */
-h1 {
-    font-size: 3rem;
-    letter-spacing: 0.2em;
-    word-spacing: 0.5em;
-    text-align: center;
-    font-weight: bold;
-    margin: 30px 0;
-    text-transform: uppercase;
-    color: white;
-}
-
-/* Tagline styling */
-p.tagline {
-    font-size: 1.5rem;
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    letter-spacing: 0.1em;
-    word-spacing: 0.3em;
-    text-shadow: 2px 2px 10px #EA4C89;
-    margin-top: 20px;
-}
+    .table tr:hover {
+        background-color: #444; /* Highlighted row on hover */
+        color: white;
+    }
 
 /* Trainer profile section */
 .trainers-container {
@@ -180,6 +160,8 @@ p.tagline {
         .trainer-card button:hover {
             background-color: #D03670;
         }
+
+/* Button styling */
 .btn {
     color: white;
     padding: 5px 10px;
@@ -211,3 +193,14 @@ p.tagline {
     .btn-danger:hover {
         background-color: #C0392B;
     }
+
+h1 {
+    font-size: 2.5rem; /* Adjust font size if needed */
+    letter-spacing: 0.2em; /* Add spacing between individual letters */
+    word-spacing: 0.5em; /* Add spacing between words */
+    line-height: 1.5; /* Adjust line spacing for multi-line text */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Ensure bold styling */
+    margin: 20px 0; /* Adjust vertical spacing */
+    color: white; /* Text color (customize to your design) */
+}

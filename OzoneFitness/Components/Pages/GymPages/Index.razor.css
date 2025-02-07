@@ -1,2 +1,125 @@
-﻿body {
+﻿/* General body styling */
+body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: black;
+    color: white;
+    line-height: 1.6;
+}
+
+/* Top bar styling */
+.top-bar {
+    position: sticky;
+    top: 0;
+    padding: 15px 30px;
+    background-color: #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+    .top-bar .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #EA4C89;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .top-bar .logo:hover {
+            color: #fff;
+        }
+
+    .top-bar .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+
+        .top-bar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+            .top-bar .nav-links a:hover {
+                background-color: #EA4C89;
+                color: #fff;
+            }
+
+/* Container for general padding */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #222; /* Dark gray for the table */
+    color: white; /* White text for readability */
+    margin: 20px auto;
+}
+
+    .table th, .table td {
+        border: 1px solid #444; /* Border color for table cells */
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #333; /* Slightly darker gray for headers */
+        color: #EA4C89; /* Highlighted text for headers */
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #292929; /* Alternate row color */
+    }
+
+    .table tr:hover {
+        background-color: #444; /* Highlighted row on hover */
+        color: white;
+    }
+
+/* Button styling */
+.btn {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #EA4C89; /* Pink for primary buttons */
+}
+
+    .btn-primary:hover {
+        background-color: #D03670;
+    }
+
+.btn-info {
+    background-color: #4BBF73; /* Green for info buttons */
+}
+
+.btn-danger {
+    background-color: #E74C3C; /* Red for danger buttons */
+}
+
+/* Main heading styling */
+h1 {
+    font-size: 2.5rem; /* Adjust font size if needed */
+    letter-spacing: 0.2em; /* Add spacing between individual letters */
+    word-spacing: 0.5em; /* Add spacing between words */
+    line-height: 1.5; /* Adjust line spacing for multi-line text */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Ensure bold styling */
+    margin: 20px 0; /* Adjust vertical spacing */
+    color: white; /* Text color (customize to your design) */
 }

@@ -1,100 +1,95 @@
 ﻿@page "/feedbacks"
 @using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.QuickGrid
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Feedbacks</PageTitle>
 
 <div class="top-bar">
-    <h1 class="logo">Ozone Gym</h1>
+    <a href="/LoginHome" class="logo">Ozone Gym</a>
     <nav class="nav-links">
         <a href="/aboutus">About</a>
         <a href="/contacts">Contact</a>
+        <a href="/gyms">Gym Outlet</a>
         <a href="/customers">Customer Page</a>
         <a href="/trainers">Trainers Page</a>
         <a href="/schedules">Schedule Page</a>
         <a href="/feedbacks">Feedback Page</a>
-        <a href="LoginHome" class="button">Back</a>
     </nav>
 </div>
 
 <body>
+
 </body>
-<link rel="stylesheet" href="css/Index.Razor.css">
-
-<style>
-    /* Add styles for the feedback table */
-    .feedback-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-        .feedback-table th, .feedback-table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        .feedback-table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .feedback-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .feedback-table tr:hover {
-            background-color: #ddd;
-        }
-
-        .feedback-table a {
-            color: #4CAF50;
-            text-decoration: none;
-            padding: 5px;
-        }
-
-            .feedback-table a:hover {
-                text-decoration: underline;
-            }
-</style>
-
-
 <h1>Feedbacks</h1>
 
 <p>
-    <a href="feedbacks/create">Create New</a>
+    <a href="feedbacks/create" class="btn btn-primary">Create New</a>
 </p>
 
-<QuickGrid Class="feedback-table" Items="context.Feedback">
-    <PropertyColumn Property="feedback => feedback.FeedbackId" />
-    <PropertyColumn Property="feedback => feedback.Rating" />
-    <PropertyColumn Property="feedback => feedback.Comments" />
-    <PropertyColumn Property="feedback => feedback.DateOfSubmission" />
-    <PropertyColumn Property="feedback => feedback.TrainerId" />
-    <PropertyColumn Property="feedback => feedback.CustomerId" />
-    <PropertyColumn Property="feedback => feedback.DateCreated" />
-    <PropertyColumn Property="feedback => feedback.DateUpdated" />
-    <PropertyColumn Property="feedback => feedback.CreatedBy" />
-    <PropertyColumn Property="feedback => feedback.UpdatedBy" />
-
-    <TemplateColumn Context="feedback">
-        <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")">Edit</a> |
-        <a href="@($"feedbacks/details?id={feedback.FeedbackId}")">Details</a> |
-        <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+<!-- Feedback Table -->
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Feedback ID</th>
+                <th>Rating</th>
+                <th>Comments</th>
+                <th>Date of Submission</th>
+                <th>Trainer ID</th>
+                <th>Customer ID</th>
+                <th>Date Created</th>
+                <th>Date Updated</th>
+                <th>Created By</th>
+                <th>Updated By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (feedbacks != null && feedbacks.Any())
+            {
+                @foreach (var feedback in feedbacks)
+                {
+                    <tr>
+                        <td>@feedback.FeedbackId</td>
+                        <td>@feedback.Rating</td>
+                        <td>@feedback.Comments</td>
+                        <td>@feedback.DateOfSubmission.ToShortDateString()</td>
+                        <td>@feedback.TrainerId</td>
+                        <td>@feedback.CustomerId</td>
+                        <td>@feedback.DateCreated.ToShortDateString()</td>
+                        <td>@(feedback.DateUpdated.ToShortDateString() ?? "N/A")</td>
+                        <td>@feedback.CreatedBy</td>
+                        <td>@feedback.UpdatedBy</td>
+                        <td>
+                            <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")" class="btn btn-info">Edit</a> |
+                            <a href="@($"feedbacks/details?id={feedback.FeedbackId}")" class="btn btn-info">Details</a> |
+                            <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="11">No feedback data available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code {
+    private List<Feedback> feedbacks = new List<Feedback>();
     private OzoneFitnessContext context = default!;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        // Fetch all the feedback records from the database
         context = DbFactory.CreateDbContext();
+        feedbacks = await context.Feedback.ToListAsync();
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();
