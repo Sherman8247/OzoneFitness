@@ -6,8 +6,13 @@
 
 <PageTitle>Edit</PageTitle>
 
-<h1>Edit</h1>
+<link rel="stylesheet" href="css/edit.razor.css">
 
+
+<h1>Edit</h1>
+<body>
+
+</body>
 <h2>Customer</h2>
 <hr />
 @if (Customer is null)
@@ -82,7 +87,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.Id == ID);
+        Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.CustomerId == ID);
 
         if (Customer is null)
         {

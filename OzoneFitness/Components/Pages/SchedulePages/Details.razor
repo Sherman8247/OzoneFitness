@@ -7,7 +7,7 @@
 <PageTitle>Details</PageTitle>
 
 <h1>Details</h1>
-
+<body></body>
 <div>
     <h2>Schedule</h2>
     <hr />
@@ -37,7 +37,7 @@
             <dd class="col-sm-10">@schedule.UpdatedBy</dd>
         </dl>
         <div>
-            <a href="@($"/schedules/edit?id={schedule.Id}")">Edit</a> |
+            <a href="/schedules/edit">Edit Details</a>|
             <a href="@($"/schedules")">Back to List</a>
         </div>
     }
@@ -52,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        schedule = await context.Schedule.FirstOrDefaultAsync(m => m.Id == ID);
+        schedule = await context.Schedule.FirstOrDefaultAsync(m => m.ScheduleId == ID);
 
         if (schedule is null)
         {

@@ -7,7 +7,9 @@
 <PageTitle>Edit</PageTitle>
 
 <h1>Edit</h1>
+<body>
 
+</body>
 <h2>Gym</h2>
 <hr />
 @if (Gym is null)
@@ -82,7 +84,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Gym ??= await context.Gym.FirstOrDefaultAsync(m => m.Id == ID);
+        Gym ??= await context.Gym.FirstOrDefaultAsync(m => m.GymId == ID);
 
         if (Gym is null)
         {

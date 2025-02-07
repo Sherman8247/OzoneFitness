@@ -26,7 +26,7 @@
 <h1>Gym Listings</h1>
 
 <p>
-    <a href="gyms/create">Create New</a>
+    <a href="gyms/create" class="btn btn-success">Create New</a>
 </p>
 
 <!-- Traditional HTML Table for Gym Listings -->
@@ -57,9 +57,9 @@
                 <td>@gym.CreatedBy</td>
                 <td>@gym.UpdatedBy</td>
                 <td>
-                    <a href="@($"gyms/edit?id={gym.GymId}")">Edit</a> |
-                    <a href="@($"gyms/details?id={gym.GymId}")">Details</a> |
-                    <a href="@($"gyms/delete?id={gym.GymId}")">Delete</a>
+                    <a href="@($"gyms/edit?id={gym.GymId}")" class="btn btn-primary btn-sm">Edit</a> |
+                    <a href="@($"gyms/details?id={gym.GymId}")" class="btn btn-info btn-sm">Details</a> |
+                    <a href="@($"gyms/delete?id={gym.GymId}")" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         }

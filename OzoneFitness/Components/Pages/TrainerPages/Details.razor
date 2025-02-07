@@ -5,9 +5,9 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Details</PageTitle>
-
+<link rel="stylesheet" href="css/details.razor.css">
 <h1>Details</h1>
-
+<body></body>
 <div>
     <h2>Trainer</h2>
     <hr />
@@ -37,7 +37,7 @@
             <dd class="col-sm-10">@trainer.UpdatedBy</dd>
         </dl>
         <div>
-            <a href="@($"/trainers/edit?id={trainer.Id}")">Edit</a> |
+            <a href="/trainers/edit">Edit Details</a>|
             <a href="@($"/trainers")">Back to List</a>
         </div>
     }
@@ -52,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        trainer = await context.Trainer.FirstOrDefaultAsync(m => m.Id == ID);
+        trainer = await context.Trainer.FirstOrDefaultAsync(m => m.TrainerId == ID);
 
         if (trainer is null)
         {

@@ -110,3 +110,39 @@ body {
     color: white;
     line-height: 1.6;
 }
+/* Image container and animation */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%; /* Ensure the container is using full available width */
+    max-width: 100%; /* No restrictions on width */
+    height: auto; /* Allow height to adjust */
+}
+
+
+.animated-image {
+    animation: float 3s ease-in-out infinite;
+    width: 30%; /* Allow the image to take full width of its parent container */
+    height: auto; /* Preserve aspect ratio */
+    display: block;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.page {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
