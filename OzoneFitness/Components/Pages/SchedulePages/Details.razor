@@ -52,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        schedule = await context.Schedule.FirstOrDefaultAsync(m => m.Id == ID);
+        schedule = await context.Schedule.FirstOrDefaultAsync(m => m.ScheduleId == ID);
 
         if (schedule is null)
         {

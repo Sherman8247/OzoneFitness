@@ -52,7 +52,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        trainer = await context.Trainer.FirstOrDefaultAsync(m => m.Id == ID);
+        trainer = await context.Trainer.FirstOrDefaultAsync(m => m.TrainerId == ID);
 
         if (trainer is null)
         {
