@@ -2,9 +2,12 @@
 @using Microsoft.EntityFrameworkCore
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Administrator")]
 
 <PageTitle>Customer Management - Ozone Gym</PageTitle>
 
@@ -28,6 +31,7 @@
 
 <h1>Customer Management</h1>
 
+
 <p>
     <a href="customers/create" class="btn btn-success">Create New Customer</a>
 </p>
@@ -47,23 +51,35 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var customer in customers)
+        @if (customers == null)
         {
             <tr>
-                <td>@customer.CustomerId</td>
-                <td>@customer.Name</td>
-                <td>@customer.Email</td>
-                <td>@customer.MembershipStatus</td>
-                <td>@customer.DateCreated.ToShortDateString()</td>
-                <td>@customer.DateUpdated.ToShortDateString()</td>
-                <td>@customer.CreatedBy</td>
-                <td>@customer.UpdatedBy</td>
-                <td>
-                    <a href="@($"customers/edit?id={customer.CustomerId}")" class="btn btn-primary btn-sm">Edit</a> |
-                    <a href="@($"customers/details?id={customer.CustomerId}")" class="btn btn-info btn-sm">Details</a> |
-                    <a href="@($"customers/delete?id={customer.CustomerId}")" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <td colspan="9">Loading...</td>
             </tr>
+        }
+        else
+        {
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.MembershipStatus</td>
+                    <td>@customer.DateCreated.ToShortDateString()</td>
+                    <td>@customer.DateUpdated.ToShortDateString()</td>
+                    <td>@customer.CreatedBy</td>
+                    <td>@customer.UpdatedBy</td>
+                    <td>
+
+                        <a href="@($"customers/edit?id={customer.CustomerId}")" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="@($"customers/details?id={customer.CustomerId}")" class="btn btn-info btn-sm">Details</a>
+                        <a href="@($"customers/delete?id={customer.CustomerId}")" class="btn btn-danger btn-sm">Delete</a>
+
+
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
@@ -74,14 +90,29 @@
 
     protected override void OnInitialized()
     {
+
         // Initialize context for database access
         context = DbFactory.CreateDbContext();
 
         // Load customers from the database
-        customers = context.Customer.ToList(); // Ensure Customer DbSet is properly defined in your context
+        try
+        {
+            customers = context.Customer.ToList(); // Ensure Customer DbSet is properly defined in your context
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading customers: {ex.Message}");
+            // Consider logging the error or displaying an error message to the user
+        }
     }
 
-    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+    public async ValueTask DisposeAsync()
+    {
+        if (context != null)
+        {
+            await context.DisposeAsync();
+        }
+    }
 }
 
 <footer class="footer">

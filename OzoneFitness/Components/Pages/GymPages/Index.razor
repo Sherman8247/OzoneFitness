@@ -2,10 +2,12 @@
 @using Microsoft.EntityFrameworkCore
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Gym Listings</PageTitle>
 
 <div class="top-bar">
     <a href="/LoginHome" class="logo">Ozone Gym</a>
@@ -25,9 +27,13 @@
 
 <h1>Gym Listings</h1>
 
-<p>
-    <a href="gyms/create" class="btn btn-success">Create New</a>
-</p>
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <p>
+            <a href="gyms/create" class="btn btn-success">Create New</a>
+        </p>
+    </Authorized>
+</AuthorizeView>
 
 <!-- Traditional HTML Table for Gym Listings -->
 <table class="table">
@@ -57,9 +63,14 @@
                 <td>@gym.CreatedBy</td>
                 <td>@gym.UpdatedBy</td>
                 <td>
-                    <a href="@($"gyms/edit?id={gym.GymId}")" class="btn btn-primary btn-sm">Edit</a> |
-                    <a href="@($"gyms/details?id={gym.GymId}")" class="btn btn-info btn-sm">Details</a> |
-                    <a href="@($"gyms/delete?id={gym.GymId}")" class="btn btn-danger btn-sm">Delete</a>
+
+                    <AuthorizeView Roles="Administrator">
+                        <Authorized>
+                            <a href="@($"gyms/details?id={gym.GymId}")" class="btn btn-info btn-sm">Details</a>
+                            <a href="@($"gyms/edit?id={gym.GymId}")" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="@($"gyms/delete?id={gym.GymId}")" class="btn btn-danger btn-sm">Delete</a>
+                        </Authorized>
+                    </AuthorizeView>
                 </td>
             </tr>
         }
