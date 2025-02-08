@@ -12,7 +12,7 @@ using OzoneFitness.Data;
 namespace OzoneFitness.Migrations
 {
     [DbContext(typeof(OzoneFitnessContext))]
-    [Migration("20250208152232_AddTrainerImage")]
+    [Migration("20250208171351_AddTrainerImage")]
     partial class AddTrainerImage
     {
         /// <inheritdoc />
@@ -344,8 +344,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8109),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8119),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(5771),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(5788),
                             Email = "Jonas@gmail.com",
                             MembershipStatus = "Member",
                             Name = "Jonas",
@@ -356,8 +356,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             CreatedBy = "System",
                             CustomerId = 0,
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8122),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8122),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(5791),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(5792),
                             Email = "Sherman@gmail.com",
                             MembershipStatus = "Nil",
                             Name = "Sherman",
@@ -454,8 +454,8 @@ namespace OzoneFitness.Migrations
                             Address = "Pasir ris Mall",
                             Capacity = 150,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8361),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8362),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6307),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6309),
                             GymId = 0,
                             OperatingHours = "12",
                             UpdatedBy = "System"
@@ -466,8 +466,8 @@ namespace OzoneFitness.Migrations
                             Address = "Tampines Mall",
                             Capacity = 200,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8364),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8364),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6311),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6312),
                             GymId = 0,
                             OperatingHours = "10",
                             UpdatedBy = "System"
@@ -569,8 +569,8 @@ namespace OzoneFitness.Migrations
                             Id = 1,
                             ContactInfo = "12345678",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8457),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8457),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6452),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6453),
                             GymId = 0,
                             Name = "Mr Goh",
                             TrainerId = 0,
@@ -582,8 +582,8 @@ namespace OzoneFitness.Migrations
                             Id = 2,
                             ContactInfo = "87654321",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8458),
-                            DateUpdated = new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8459),
+                            DateCreated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6454),
+                            DateUpdated = new DateTime(2025, 2, 9, 1, 13, 50, 809, DateTimeKind.Local).AddTicks(6454),
                             GymId = 0,
                             Name = "Mr Tang",
                             TrainerId = 0,
@@ -609,15 +609,15 @@ namespace OzoneFitness.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "670692b1-302b-4ffc-930f-0aa9b182ffd1",
+                            ConcurrencyStamp = "f30bb7fd-66c3-4384-abb0-7b136839ce02",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEv1TiwL2UPoov61a4eIiEY9Ttu0He9ijOoi9+kQYoUoTvW/vDV5FFkUBzDFm3BToQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMNhgG1DOhHOKeLCyervo819Lighyf7BlLC0bFMY7vmQuHSmUZvsGtaQeiSB+orSLg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ba57ba11-4b15-4dd6-a359-6ec68339637d",
+                            SecurityStamp = "4d2df2f7-f3e5-443a-a440-99bc390e1c43",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com",
                             FirstName = "Admin",

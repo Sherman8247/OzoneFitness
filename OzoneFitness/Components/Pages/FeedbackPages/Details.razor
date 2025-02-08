@@ -54,7 +54,7 @@
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        feedback = await context.Feedback.FirstOrDefaultAsync(m => m.Id == ID);
+        feedback = await context.Feedback.FirstOrDefaultAsync(m => m.FeedbackId == ID);
 
         if (feedback is null)
         {

@@ -1,92 +1,90 @@
-﻿body {
+﻿/* General styling for the page */
+body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
-    background-color: black;
-    / Black background / color: white;
+    background-color: black; / Black background /
+    color: white;
     line-height: 1.6;
 }
 
-/ Main container /
-/ Main container /
+/* Main container */
+/* Main container */
 .row {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px;
-    background-color: #222;
-    / Dark gray container background / border-radius: 10px;
+    background-color: #222; /* Dark gray container background */
+    border-radius: 10px;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    / Centers content horizontally / justify-content: center;
-    / Centers content vertically / min-height: 80vh;
-    / Ensures the container takes up at least 80% of the viewport height /
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    min-height: 80vh; /* Ensures the container takes up at least 80% of the viewport height */
 }
 
-/ Page title /
+/* Page title */
 h1 {
     font-size: 2.5rem;
-    color: #EA4C89;
-    / Highlighted pink color / margin-bottom: 15px;
+    color: #EA4C89; /* Highlighted pink color */
+    margin-bottom: 15px;
     text-align: center;
 }
 
-/ Section title /
+/* Section title */
 h2 {
     font-size: 2rem;
-    color: #4BBF73;
-    / Green for emphasis / margin-bottom: 10px;
+    color: #4BBF73; /* Green for emphasis */
+    margin-bottom: 10px;
     text-align: center;
 }
 
-/ Form labels /
+/* Form labels */
 label {
     display: block;
     font-weight: bold;
-    color: #EA4C89;
-    / Pink for labels / margin-bottom: 5px;
+    color: #EA4C89; /*Pink for labels */
+    margin-bottom: 5px;
     text-align: left;
 }
 
-/ Form control /
+/* Form control */
 .form-control {
     width: 100%;
-    max-width: 400px;
-    / Restricts input field width / padding: 10px;
-    background-color: #333;
-    / Darker gray for inputs / border: 1px solid #555;
+    max-width: 400px; /* Restricts input field width */
+    padding: 10px;
+    background-color: #333; /* Darker gray for inputs */
+    border: 1px solid #555;
     color: white;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-/ Form actions /
+/* Form actions */
 button.btn {
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
     color: white;
-    background-color: #EA4C89;
-    / Pink for the submit button / border: none;
+    background-color: #EA4C89; /* Pink for the submit button */
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button.btn:hover {
-    background-color: #D03670;
-    / Darker pink on hover /
-}
+    button.btn:hover {
+        background-color: #D03670; /* Darker pink on hover */
+    }
 
 a {
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
-    color: #4BBF73;
-    / Green for links / margin-left: 15px;
+    color: #4BBF73; /* Green for links */
+    margin-left: 15px;
 }
 
     a:hover {
-        color: #3B9E5D;
-        / Darker green on hover */
-    }
+        color: #3B9E5D; /* Darker green on hover */
+}

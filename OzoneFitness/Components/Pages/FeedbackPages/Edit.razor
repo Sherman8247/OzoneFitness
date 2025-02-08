@@ -92,7 +92,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Feedback ??= await context.Feedback.FirstOrDefaultAsync(m => m.Id == ID);
+        Feedback ??= await context.Feedback.FirstOrDefaultAsync(m => m.FeedbackId == ID);
 
         if (Feedback is null)
         {
