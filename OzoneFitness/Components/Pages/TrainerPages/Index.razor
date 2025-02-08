@@ -33,7 +33,12 @@
     <p>
         <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
     </p>
-
+@if (trainers == null)
+{
+    <p>Loading...</p>
+}
+else
+{
     <table class="table table-striped trainers-table">
         <thead>
             <tr>
@@ -67,6 +72,7 @@
             }
         </tbody>
     </table>
+}
 </div>
 
 @code {

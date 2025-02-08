@@ -4,74 +4,87 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Edit</PageTitle>
-
-<h1>Edit</h1>
+<PageTitle>Edit Gym</PageTitle>
+<link rel="stylesheet" href="css/Edit.razor.css">
 <body>
-
 </body>
-<h2>Gym</h2>
-<hr />
-@if (Gym is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div class="row">
-        <div class="col-md-4">
-            <EditForm method="post" Model="Gym" OnValidSubmit="UpdateGym" FormName="edit" Enhance>
-                <DataAnnotationsValidator />
-                <ValidationSummary role="alert"/>
-                <input type="hidden" name="Gym.ID" value="@Gym.Id" />
-                <div class="mb-3">
-                    <label for="gymid" class="form-label">GymId:</label>
-                    <InputNumber id="gymid" @bind-Value="Gym.GymId" class="form-control" />
-                    <ValidationMessage For="() => Gym.GymId" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address:</label>
-                    <InputText id="address" @bind-Value="Gym.Address" class="form-control" />
-                    <ValidationMessage For="() => Gym.Address" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="operatinghours" class="form-label">OperatingHours:</label>
-                    <InputText id="operatinghours" @bind-Value="Gym.OperatingHours" class="form-control" />
-                    <ValidationMessage For="() => Gym.OperatingHours" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="capacity" class="form-label">Capacity:</label>
-                    <InputNumber id="capacity" @bind-Value="Gym.Capacity" class="form-control" />
-                    <ValidationMessage For="() => Gym.Capacity" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="datecreated" class="form-label">DateCreated:</label>
-                    <InputDate id="datecreated" @bind-Value="Gym.DateCreated" class="form-control" />
-                    <ValidationMessage For="() => Gym.DateCreated" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="dateupdated" class="form-label">DateUpdated:</label>
-                    <InputDate id="dateupdated" @bind-Value="Gym.DateUpdated" class="form-control" />
-                    <ValidationMessage For="() => Gym.DateUpdated" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="createdby" class="form-label">CreatedBy:</label>
-                    <InputText id="createdby" @bind-Value="Gym.CreatedBy" class="form-control" />
-                    <ValidationMessage For="() => Gym.CreatedBy" class="text-danger" />
-                </div>
-                <div class="mb-3">
-                    <label for="updatedby" class="form-label">UpdatedBy:</label>
-                    <InputText id="updatedby" @bind-Value="Gym.UpdatedBy" class="form-control" />
-                    <ValidationMessage For="() => Gym.UpdatedBy" class="text-danger" />
-                </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </EditForm>
-        </div>
-    </div>
-}
+<div class="container">
+    <h1 class="page-title">Edit Gym</h1>
+    <p class="page-description">Update the details for the gym below.</p>
 
-<div>
-    <a href="/gyms">Back to List</a>
+    @if (Gym == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <EditForm method="post" Model="Gym" OnValidSubmit="UpdateGym">
+            <DataAnnotationsValidator />
+            <ValidationSummary role="alert" />
+
+            <!-- Gym ID -->
+            <div class="form-group">
+                <label for="gymid">Gym ID:</label>
+                <InputNumber id="gymid" @bind-Value="Gym.GymId" class="form-control" />
+                <ValidationMessage For="() => Gym.GymId" class="text-danger" />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <InputText id="address" @bind-Value="Gym.Address" class="form-control" />
+                <ValidationMessage For="() => Gym.Address" class="text-danger" />
+            </div>
+
+            <!-- Operating Hours -->
+            <div class="form-group">
+                <label for="operatinghours">Operating Hours:</label>
+                <InputText id="operatinghours" @bind-Value="Gym.OperatingHours" class="form-control" />
+                <ValidationMessage For="() => Gym.OperatingHours" class="text-danger" />
+            </div>
+
+            <!-- Capacity -->
+            <div class="form-group">
+                <label for="capacity">Capacity:</label>
+                <InputNumber id="capacity" @bind-Value="Gym.Capacity" class="form-control" />
+                <ValidationMessage For="() => Gym.Capacity" class="text-danger" />
+            </div>
+
+            <!-- Date Created -->
+            <div class="form-group">
+                <label for="datecreated">Date Created:</label>
+                <InputDate id="datecreated" @bind-Value="Gym.DateCreated" class="form-control" />
+                <ValidationMessage For="() => Gym.DateCreated" class="text-danger" />
+            </div>
+
+            <!-- Date Updated -->
+            <div class="form-group">
+                <label for="dateupdated">Date Updated:</label>
+                <InputDate id="dateupdated" @bind-Value="Gym.DateUpdated" class="form-control" />
+                <ValidationMessage For="() => Gym.DateUpdated" class="text-danger" />
+            </div>
+
+            <!-- Created By -->
+            <div class="form-group">
+                <label for="createdby">Created By:</label>
+                <InputText id="createdby" @bind-Value="Gym.CreatedBy" class="form-control" />
+                <ValidationMessage For="() => Gym.CreatedBy" class="text-danger" />
+            </div>
+
+            <!-- Updated By -->
+            <div class="form-group">
+                <label for="updatedby">Updated By:</label>
+                <InputText id="updatedby" @bind-Value="Gym.UpdatedBy" class="form-control" />
+                <ValidationMessage For="() => Gym.UpdatedBy" class="text-danger" />
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/gyms" class="btn btn-secondary">Back to List</a>
+            </div>
+        </EditForm>
+    }
 </div>
 
 @code {
@@ -86,14 +99,12 @@ else
         using var context = DbFactory.CreateDbContext();
         Gym ??= await context.Gym.FirstOrDefaultAsync(m => m.GymId == ID);
 
-        if (Gym is null)
+        if (Gym == null)
         {
             NavigationManager.NavigateTo("notfound");
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateGym()
     {
         using var context = DbFactory.CreateDbContext();

@@ -7,41 +7,60 @@
 <PageTitle>Details</PageTitle>
 <link rel="stylesheet" href="css/details.razor.css">
 <h1>Details</h1>
-<body></body>
-<div>
-    <h2>Trainer</h2>
-    <hr />
-    @if (trainer is null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else {
-        <dl class="row">
-            <dt class="col-sm-2">TrainerID</dt>
-            <dd class="col-sm-10">@trainer.TrainerId</dd>
-            <dt class="col-sm-2">Name</dt>
-            <dd class="col-sm-10">@trainer.Name</dd>
-            <dt class="col-sm-2">ContactInfo</dt>
-            <dd class="col-sm-10">@trainer.ContactInfo</dd>
-            <dt class="col-sm-2">YearsOfExperience</dt>
-            <dd class="col-sm-10">@trainer.YearsOfExperience</dd>
-            <dt class="col-sm-2">GymID</dt>
-            <dd class="col-sm-10">@trainer.GymId</dd>
-            <dt class="col-sm-2">DateCreated</dt>
-            <dd class="col-sm-10">@trainer.DateCreated</dd>
-            <dt class="col-sm-2">DateUpdated</dt>
-            <dd class="col-sm-10">@trainer.DateUpdated</dd>
-            <dt class="col-sm-2">CreatedBy</dt>
-            <dd class="col-sm-10">@trainer.CreatedBy</dd>
-            <dt class="col-sm-2">UpdatedBy</dt>
-            <dd class="col-sm-10">@trainer.UpdatedBy</dd>
-        </dl>
-        <div>
-            <a href="/trainers/edit">Edit Details</a>|
-            <a href="@($"/trainers")">Back to List</a>
-        </div>
-    }
-</div>
+<body>
+    <div class="details-container">
+        @if (trainer is null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <!-- Image Section -->
+            <div class="image-container">
+                @if (trainer.Image != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(trainer.Image)"
+                         alt="Trainer Image"
+                         class="trainer-img" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </div>
+
+            <!-- Details Section -->
+            <div class="details-content">
+                <h2>Trainer</h2>
+                <dl class="row">
+                    <dt class="col-sm-3">TrainerID</dt>
+                    <dd class="col-sm-9">@trainer.TrainerId</dd>
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9">@trainer.Name</dd>
+                    <dt class="col-sm-3">ContactInfo</dt>
+                    <dd class="col-sm-9">@trainer.ContactInfo</dd>
+                    <dt class="col-sm-3">YearsOfExperience</dt>
+                    <dd class="col-sm-9">@trainer.YearsOfExperience</dd>
+                    <dt class="col-sm-3">GymID</dt>
+                    <dd class="col-sm-9">@trainer.GymId</dd>
+                    <dt class="col-sm-3">DateCreated</dt>
+                    <dd class="col-sm-9">@trainer.DateCreated</dd>
+                    <dt class="col-sm-3">DateUpdated</dt>
+                    <dd class="col-sm-9">@trainer.DateUpdated</dd>
+                    <dt class="col-sm-3">CreatedBy</dt>
+                    <dd class="col-sm-9">@trainer.CreatedBy</dd>
+                    <dt class="col-sm-3">UpdatedBy</dt>
+                    <dd class="col-sm-9">@trainer.UpdatedBy</dd>
+                </dl>
+
+                <div>
+                    <a href="/trainers/edit">Edit Details</a> |
+                    <a href="@($"/trainers")">Back to List</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
 
 @code {
     private Trainer? trainer;
@@ -57,6 +76,10 @@
         if (trainer is null)
         {
             NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            Console.WriteLine($"Trainer: {trainer.Name}, Image Length: {trainer.Image?.Length}");
         }
     }
 }

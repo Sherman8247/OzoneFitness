@@ -7,7 +7,7 @@
 <PageTitle>Delete Gym</PageTitle>
 
 <h1>Delete Gym</h1>
-
+<body></body>
 <p>Are you sure you want to delete this gym?</p>
 
 <div class="container">
@@ -54,7 +54,7 @@
         </dl>
         <EditForm method="post" Model="gym" OnValidSubmit="DeleteGym">
             <button type="submit" class="btn btn-danger" disabled="@(gym is null)">Delete</button> |
-            <a href="/gyms">Back to List</a>
+            <a href="/gyms"class="btn btn-primary">Back to List</a>
         </EditForm>
     }
 </div>

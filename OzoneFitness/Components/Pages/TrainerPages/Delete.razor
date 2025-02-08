@@ -5,58 +5,52 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Delete</PageTitle>
+<link rel="stylesheet" href="css/delete.razor.css">
+<body>
+</body>
+<div class="delete-container">
+    <h1 class="delete-title">Delete Trainer</h1>
+    <p class="warning-text">Are you sure you want to delete this trainer?</p>
 
-<h1>Delete</h1>
-<body></body>
-<p>Are you sure you want to delete this?</p>
-<div>
-    <h2>Trainer</h2>
-    <hr />
-    @if (trainer is null)
+    @if (trainer == null)
     {
         <p><em>Loading...</em></p>
     }
-    else {
-        <dl class="row">
-            <dt class="col-sm-2">TrainerID</dt>
-            <dd class="col-sm-10">@trainer.TrainerId</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">Name</dt>
-            <dd class="col-sm-10">@trainer.Name</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">ContactInfo</dt>
-            <dd class="col-sm-10">@trainer.ContactInfo</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">YearsOfExperience</dt>
-            <dd class="col-sm-10">@trainer.YearsOfExperience</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">GymID</dt>
-            <dd class="col-sm-10">@trainer.GymId</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">DateCreated</dt>
-            <dd class="col-sm-10">@trainer.DateCreated</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">DateUpdated</dt>
-            <dd class="col-sm-10">@trainer.DateUpdated</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">CreatedBy</dt>
-            <dd class="col-sm-10">@trainer.CreatedBy</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">UpdatedBy</dt>
-            <dd class="col-sm-10">@trainer.UpdatedBy</dd>
-        </dl>
-        <EditForm method="post" Model="trainer" OnValidSubmit="DeleteTrainer" FormName="delete" Enhance>
-            <button type="submit" class="btn btn-danger" disabled="@(trainer is null)">Delete</button> |
-            <a href="/trainers">Back to List</a>
-        </EditForm>
+    else
+    {
+        <div class="delete-content">
+            <!-- Trainer Details -->
+            <div class="details">
+                <dl>
+                    <dt>TrainerID:</dt>
+                    <dd>@trainer.TrainerId</dd>
+                    <dt>Name:</dt>
+                    <dd>@trainer.Name</dd>
+                    <dt>Contact Info:</dt>
+                    <dd>@trainer.ContactInfo</dd>
+                    <dt>Years of Experience:</dt>
+                    <dd>@trainer.YearsOfExperience</dd>
+                    <dt>GymID:</dt>
+                    <dd>@trainer.GymId</dd>
+                    <dt>Date Created:</dt>
+                    <dd>@trainer.DateCreated</dd>
+                    <dt>Date Updated:</dt>
+                    <dd>@trainer.DateUpdated</dd>
+                    <dt>Created By:</dt>
+                    <dd>@trainer.CreatedBy</dd>
+                    <dt>Updated By:</dt>
+                    <dd>@trainer.UpdatedBy</dd>
+                </dl>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions">
+                <EditForm method="post" Model="trainer" OnValidSubmit="DeleteTrainer" FormName="delete">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </EditForm>
+                <a href="/trainers" class="btn-cancel">Back to List</a>
+            </div>
+        </div>
     }
 </div>
 
@@ -71,7 +65,7 @@
         using var context = DbFactory.CreateDbContext();
         trainer = await context.Trainer.FirstOrDefaultAsync(m => m.TrainerId == ID);
 
-        if (trainer is null)
+        if (trainer == null)
         {
             NavigationManager.NavigateTo("notfound");
         }

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using OzoneFitness.Configurations.Entities;
+using OzoneFitness.Domain;
+using System.Reflection.Emit;
 
 namespace OzoneFitness.Data
 {
@@ -24,6 +26,10 @@ namespace OzoneFitness.Data
             Builder.ApplyConfiguration(new RoleSeed());
             Builder.ApplyConfiguration(new UserRoleSeed());
             Builder.ApplyConfiguration(new UserSeed());
+            Builder.Entity<Trainer>()
+                .Property(t => t.Image)
+                .HasColumnType("varbinary(max)"); // Ensure Image is stored as a varbinary(max) in the database
         }
     }
+
 }

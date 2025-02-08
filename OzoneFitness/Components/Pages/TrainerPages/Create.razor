@@ -59,7 +59,11 @@
                 <label for="updatedby" class="form-label">UpdatedBy:</label> 
                 <InputText id="updatedby" @bind-Value="Trainer.UpdatedBy" class="form-control" /> 
                 <ValidationMessage For="() => Trainer.UpdatedBy" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="trainerImage" class="form-label">Upload Image:</label>
+                <InputFile id="trainerImage" OnChange="UploadImage" class="form-control" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -72,13 +76,54 @@
 @code {
     [SupplyParameterFromForm]
     private Trainer Trainer { get; set; } = new();
+    
+    private IBrowserFile? uploadedFile;
 
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file != null)
+        {
+            using var stream = new MemoryStream();
+            await file.OpenReadStream(maxAllowedSize: 10_000_000).CopyToAsync(stream);
+            Trainer.Image = stream.ToArray();
+
+            // Debug log
+            Console.WriteLine($"Image selected: {Trainer.Image.Length} bytes");
+        }
+        else
+        {
+            Console.WriteLine("No image uploaded.");
+        }
+    }
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddTrainer()
     {
         using var context = DbFactory.CreateDbContext();
+
+        // Debug log before saving
+        if (Trainer.Image != null)
+        {
+            Console.WriteLine($"Saving Image: {Trainer.Image.Length} bytes");
+        }
+        else
+        {
+            Console.WriteLine("No image data found before saving.");
+        }
+
         context.Trainer.Add(Trainer);
         await context.SaveChangesAsync();
+
         NavigationManager.NavigateTo("/trainers");
+    }
+    private async Task SaveTrainer()
+    {
+        if (Trainer != null)
+        {
+            using var context = DbFactory.CreateDbContext();
+            context.Trainer.Add(Trainer); // Add the Trainer entity, which includes the Image
+            await context.SaveChangesAsync(); // Save changes to the database
+            NavigationManager.NavigateTo("/trainers"); // Redirect to the trainers list page
+        }
     }
 }

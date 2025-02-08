@@ -24,10 +24,12 @@ h1 {
     color: #EA4C89;
     text-align: center;
 }
-
+h2 {
+    color: lightgrey;
+}
 p {
     font-size: 1.2rem;
-    color: #ccc;
+    color: red;
     text-align: center;
 }
 
@@ -83,9 +85,9 @@ p {
     }
 
 .btn-primary {
-    background-color: #EA4C89;
+    background-color: #4BBF73;
 }
 
     .btn-primary:hover {
-        background-color: #D03670;
+        background-color: #3B9E5D;
     }

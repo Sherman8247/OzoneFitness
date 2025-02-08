@@ -5,60 +5,59 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Delete</PageTitle>
-
-<h1>Delete</h1>
+<link rel="stylesheet" href="css/delete.razor.css">
 <body>
 
 </body>
-<p>Are you sure you want to delete this?</p>
-<div>
-    <h2>Schedule</h2>
-    <hr />
-    @if (schedule is null)
+<div class="container">
+    <h1>Delete Schedule</h1>
+    <p class="delete-warning">Are you sure you want to delete this schedule?</p>
+
+    @if (schedule == null)
     {
         <p><em>Loading...</em></p>
     }
-    else {
-        <dl class="row">
-            <dt class="col-sm-2">ScheduleID</dt>
-            <dd class="col-sm-10">@schedule.ScheduleId</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">DayOfWeek</dt>
-            <dd class="col-sm-10">@schedule.DayOfWeek</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">StartTime</dt>
-            <dd class="col-sm-10">@schedule.StartTime</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">EndTime</dt>
-            <dd class="col-sm-10">@schedule.EndTime</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">TrainerID</dt>
-            <dd class="col-sm-10">@schedule.TrainerId</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">DateCreated</dt>
-            <dd class="col-sm-10">@schedule.DateCreated</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">DateUpdated</dt>
-            <dd class="col-sm-10">@schedule.DateUpdated</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">CreatedBy</dt>
-            <dd class="col-sm-10">@schedule.CreatedBy</dd>
-        </dl>
-        <dl class="row">
-            <dt class="col-sm-2">UpdatedBy</dt>
-            <dd class="col-sm-10">@schedule.UpdatedBy</dd>
-        </dl>
-        <EditForm method="post" Model="schedule" OnValidSubmit="DeleteSchedule" FormName="delete" Enhance>
-            <button type="submit" class="btn btn-danger" disabled="@(schedule is null)">Delete</button> |
-            <a href="/schedules">Back to List</a>
-        </EditForm>
+    else
+    {
+        <!-- Schedule Details -->
+        <div class="details">
+            <dl class="row">
+                <dt>Schedule ID:</dt>
+                <dd>@schedule.ScheduleId</dd>
+            </dl>
+            <dl class="row">
+                <dt>Day of Week:</dt>
+                <dd>@schedule.DayOfWeek</dd>
+            </dl>
+            <dl class="row">
+                <dt>Start Time:</dt>
+                <dd>@schedule.StartTime</dd>
+            </dl>
+            <dl class="row">
+                <dt>End Time:</dt>
+                <dd>@schedule.EndTime</dd>
+            </dl>
+            <dl class="row">
+                <dt>Trainer ID:</dt>
+                <dd>@schedule.TrainerId</dd>
+            </dl>
+            <dl class="row">
+                <dt>Date Created:</dt>
+                <dd>@schedule.DateCreated</dd>
+            </dl>
+            <dl class="row">
+                <dt>Date Updated:</dt>
+                <dd>@schedule.DateUpdated</dd>
+            </dl>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="delete-buttons">
+            <EditForm method="post" Model="schedule" OnValidSubmit="DeleteSchedule">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </EditForm>
+            <a href="/schedules" class="btn btn-primary">Back to List</a>
+        </div>
     }
 </div>
 
@@ -73,7 +72,7 @@
         using var context = DbFactory.CreateDbContext();
         schedule = await context.Schedule.FirstOrDefaultAsync(m => m.ScheduleId == ID);
 
-        if (schedule is null)
+        if (schedule == null)
         {
             NavigationManager.NavigateTo("notfound");
         }
@@ -87,3 +86,4 @@
         NavigationManager.NavigateTo("/schedules");
     }
 }
+
