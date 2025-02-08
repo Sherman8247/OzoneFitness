@@ -22,49 +22,49 @@ namespace OzoneFitness.Migrations
                 keyColumn: "Id",
                 keyValue: "3781efa7-66dc-47f0-860f-e506d04102e4",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "af3d2519-5a2b-4c80-86ac-3f75e6757199", "AQAAAAIAAYagAAAAEJdLB0+zk95Dc56bdmDKpa4YlY4K+DYWlwbHNo06JZcOF4jAtDAOt8W7UFIK7C6CbA==", "f2530efb-80fe-476a-b9fe-22f08f0dc2b8" });
+                values: new object[] { "670692b1-302b-4ffc-930f-0aa9b182ffd1", "AQAAAAIAAYagAAAAEEv1TiwL2UPoov61a4eIiEY9Ttu0He9ijOoi9+kQYoUoTvW/vDV5FFkUBzDFm3BToQ==", "ba57ba11-4b15-4dd6-a359-6ec68339637d" });
 
             migrationBuilder.UpdateData(
                 table: "Customer",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3531), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3541) });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8109), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8119) });
 
             migrationBuilder.UpdateData(
                 table: "Customer",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3544), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3544) });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8122), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8122) });
 
             migrationBuilder.UpdateData(
                 table: "Gym",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3750), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3750) });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8361), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8362) });
 
             migrationBuilder.UpdateData(
                 table: "Gym",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3752), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3753) });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8364), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8364) });
 
             migrationBuilder.UpdateData(
                 table: "Trainer",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "DateCreated", "DateUpdated", "Image" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3845), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3845), null });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8457), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8457), null });
 
             migrationBuilder.UpdateData(
                 table: "Trainer",
                 keyColumn: "Id",
                 keyValue: 2,
                 columns: new[] { "DateCreated", "DateUpdated", "Image" },
-                values: new object[] { new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3847), new DateTime(2025, 2, 8, 15, 36, 10, 415, DateTimeKind.Local).AddTicks(3847), null });
+                values: new object[] { new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8458), new DateTime(2025, 2, 8, 23, 22, 32, 100, DateTimeKind.Local).AddTicks(8459), null });
         }
 
         /// <inheritdoc />

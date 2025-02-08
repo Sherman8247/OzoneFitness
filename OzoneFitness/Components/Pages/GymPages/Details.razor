@@ -17,7 +17,8 @@
     {
         <p><em>Loading...</em></p>
     }
-    else {
+    else
+    {
         <dl class="row">
             <dt class="col-sm-2">GymID</dt>
             <dd class="col-sm-10">@gym.GymId</dd>
@@ -37,7 +38,7 @@
             <dd class="col-sm-10">@gym.UpdatedBy</dd>
         </dl>
         <div>
-            <a href="/gyms/edit">Edit Details</a>|
+            <a href="@($"/gyms/edit?id={gym.GymId}")">Edit Gym</a>
             <a href="@($"/gyms")">Back to List</a>
         </div>
     }

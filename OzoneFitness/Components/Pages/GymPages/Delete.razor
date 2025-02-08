@@ -52,8 +52,9 @@
             <dt class="col-sm-2">Updated By</dt>
             <dd class="col-sm-10">@gym.UpdatedBy</dd>
         </dl>
-        <EditForm method="post" Model="gym" OnValidSubmit="DeleteGym">
-            <button type="submit" class="btn btn-danger" disabled="@(gym is null)">Delete</button> |
+         <EditForm method="post" Model="gym" OnValidSubmit="DeleteGym" FormName="deleteGym">
+            <InputHidden Value="@gym.Id" />
+            <button type="submit" class="btn btn-danger" disabled="@(gym is null)">Delete</button>
             <a href="/gyms"class="btn btn-primary">Back to List</a>
         </EditForm>
     }
@@ -78,9 +79,34 @@
 
     private async Task DeleteGym()
     {
-        using var context = DbFactory.CreateDbContext();
-        context.Gym.Remove(gym!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/gyms");
+         using var context = DbFactory.CreateDbContext();
+         if (gym != null)
+        {
+            try
+            {
+                var gymToDelete = await context.Gym.FindAsync(gym.Id); // Look up the gym by gym.Id
+                if (gymToDelete != null)
+                {
+                    context.Gym.Remove(gymToDelete);
+                    await context.SaveChangesAsync();
+                    NavigationManager.NavigateTo("/gyms");
+                }
+                else
+                {
+                  Console.WriteLine($"Gym with ID {gym.Id} not found. Cannot delete.");
+                  //Optionally: Display this error in the UI
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or display an error message to the user
+                Console.WriteLine($"Error deleting gym: {ex.Message}");
+                // Optionally: Display an error message in the UI
+            }
+        }
+        else
+        {
+            Console.WriteLine("Gym object is null. Cannot delete.");
+        }
     }
 }

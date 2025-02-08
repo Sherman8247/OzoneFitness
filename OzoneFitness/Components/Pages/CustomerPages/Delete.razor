@@ -55,7 +55,8 @@
 
         <!-- Action Buttons -->
         <div class="delete-buttons">
-            <EditForm method="post" Model="customer" OnValidSubmit="DeleteCustomer">
+            <EditForm method="post" Model="customer" OnValidSubmit="DeleteCustomer" FormName="deleteCustomer">
+                <InputHidden Value="@customer.Id" />
                 <button type="submit" class="btn btn-danger">Delete</button>
             </EditForm>
             <a href="/customers" class="btn btn-primary">Back to List</a>
@@ -83,8 +84,25 @@
     private async Task DeleteCustomer()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Customer.Remove(customer!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/customers");
+         if (customer != null) // Ensure customer is not null
+        {
+            try
+            {
+                context.Customer.Remove(customer);
+                await context.SaveChangesAsync();
+                NavigationManager.NavigateTo("/customers");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or display an error message to the user
+                Console.WriteLine($"Error deleting customer: {ex.Message}");
+                // Optionally: Display an error message in the UI
+            }
+        }
+        else
+        {
+            Console.WriteLine("Customer object is null. Cannot delete.");
+            //Optionally: Display this error in the UI
+        }
     }
 }

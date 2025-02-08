@@ -4,76 +4,89 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Edit</PageTitle>
-
+<PageTitle>Edit Customer</PageTitle>
 <link rel="stylesheet" href="css/Edit.razor.css">
 
+<body>
+    <div class="container">
+        <h1 class="page-title">Edit Customer</h1>
+        <p class="page-description">Update the details for the customer below.</p>
 
-<h1>Edit</h1>
-<body></body>
-<h2>Customer</h2>
-<hr />
-@if (Customer is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <div class="row">
-        <div class="col-md-4">
-            <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer" FormName="edit" Enhance>
+        @if (Customer == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer">
                 <DataAnnotationsValidator />
-                <ValidationSummary role="alert"/>
-                <input type="hidden" name="Customer.ID" value="@Customer.Id" />
-                <div class="mb-3">
-                    <label for="customerid" class="form-label">CustomerID:</label>
+                <ValidationSummary role="alert" />
+
+                <!-- Customer ID -->
+                <div class="form-group">
+                    <label for="customerid">Customer ID:</label>
                     <InputNumber id="customerid" @bind-Value="Customer.CustomerId" class="form-control" />
                     <ValidationMessage For="() => Customer.CustomerId" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
+
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="name">Name:</label>
                     <InputText id="name" @bind-Value="Customer.Name" class="form-control" />
                     <ValidationMessage For="() => Customer.Name" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email:</label>
                     <InputText id="email" @bind-Value="Customer.Email" class="form-control" />
                     <ValidationMessage For="() => Customer.Email" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="membershipstatus" class="form-label">MembershipStatus:</label>
+
+                <!-- Membership Status -->
+                <div class="form-group">
+                    <label for="membershipstatus">Membership Status:</label>
                     <InputText id="membershipstatus" @bind-Value="Customer.MembershipStatus" class="form-control" />
                     <ValidationMessage For="() => Customer.MembershipStatus" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="datecreated" class="form-label">DateCreated:</label>
+
+                <!-- Date Created -->
+                <div class="form-group">
+                    <label for="datecreated">Date Created:</label>
                     <InputDate id="datecreated" @bind-Value="Customer.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Customer.DateCreated" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="dateupdated" class="form-label">DateUpdated:</label>
+
+                <!-- Date Updated -->
+                <div class="form-group">
+                    <label for="dateupdated">Date Updated:</label>
                     <InputDate id="dateupdated" @bind-Value="Customer.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Customer.DateUpdated" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="createdby" class="form-label">CreatedBy:</label>
+
+                <!-- Created By -->
+                <div class="form-group">
+                    <label for="createdby">Created By:</label>
                     <InputText id="createdby" @bind-Value="Customer.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Customer.CreatedBy" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="updatedby" class="form-label">UpdatedBy:</label>
+
+                <!-- Updated By -->
+                <div class="form-group">
+                    <label for="updatedby">Updated By:</label>
                     <InputText id="updatedby" @bind-Value="Customer.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Customer.UpdatedBy" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </EditForm>
-        </div>
-    </div>
-}
 
-<div>
-    <a href="/customers">Back to List</a>
-</div>
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/customers" class="btn btn-secondary">Back to List</a>
+                </div>
+            </EditForm>
+        }
+    </div>
+</body>
 
 @code {
     [SupplyParameterFromQuery]
@@ -87,14 +100,12 @@ else
         using var context = DbFactory.CreateDbContext();
         Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.CustomerId == ID);
 
-        if (Customer is null)
+        if (Customer == null)
         {
             NavigationManager.NavigateTo("notfound");
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateCustomer()
     {
         using var context = DbFactory.CreateDbContext();

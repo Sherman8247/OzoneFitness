@@ -53,7 +53,8 @@
 
         <!-- Action Buttons -->
         <div class="delete-buttons">
-            <EditForm method="post" Model="schedule" OnValidSubmit="DeleteSchedule">
+            <EditForm method="post" Model="schedule" OnValidSubmit="DeleteSchedule" FormName="deleteSchedule">
+                <InputHidden Value="@schedule.ScheduleId" />
                 <button type="submit" class="btn btn-danger">Delete</button>
             </EditForm>
             <a href="/schedules" class="btn btn-primary">Back to List</a>
@@ -81,9 +82,28 @@
     private async Task DeleteSchedule()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Schedule.Remove(schedule!);
-        await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/schedules");
-    }
-}
 
+        var scheduleToDelete = await context.Schedule.FirstOrDefaultAsync(s => s.ScheduleId == ID);
+        if (scheduleToDelete != null)
+        {
+            try
+            {
+                context.Schedule.Remove(scheduleToDelete);
+                await context.SaveChangesAsync();
+
+                // Redirect back to /schedules after deletion
+                NavigationManager.NavigateTo("/schedules");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting schedule: {ex.Message}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Schedule not found. Cannot delete.");
+        }
+    }
+
+
+}
