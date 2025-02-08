@@ -1,0 +1,87 @@
+﻿body {
+    background-color: #222; /* Dark background */
+    color: #eee; /* Light text color */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container for the access denied content */
+.access-denied-container {
+    background-color: #333; /* Slightly lighter background for the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px; /* Ensure the container doesn't get too wide */
+}
+
+/* Style for the header */
+header {
+    margin-bottom: 20px;
+}
+
+/* Styles for headings (h1) */
+h1.text-danger {
+    color: #ff4d4d; /* Red color for emphasis */
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Style for paragraphs (p) */
+p.text-danger {
+    color: #ff9999; /* Lighter red for readability */
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Style for the "Back to Home" link */
+a {
+    color: #8ab4f8; /* Attractive link color */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #c6d4ef; /* Lighter color on hover */
+        text-decoration: underline;
+    }
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.animated-image {
+    animation: float 3s ease-in-out infinite;
+    max-width: 90%;
+    height: auto;
+    display: block;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+.page {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}

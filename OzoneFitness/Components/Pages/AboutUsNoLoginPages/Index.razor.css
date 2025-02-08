@@ -1,0 +1,157 @@
+﻿﻿.top-bar {
+    position: sticky;
+    top: 0;
+    padding: 15px 30px;
+    background-color: #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.top-bar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #EA4C89;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .top-bar .logo:hover {
+        color: #fff;
+    }
+
+.top-bar .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+    .top-bar .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+
+        .top-bar .nav-links a:hover {
+            background-color: #EA4C89;
+            color: #fff;
+        }
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem; /* Adjust font size if needed */
+    letter-spacing: 0.2em; /* Add spacing between individual letters */
+    word-spacing: 0.5em; /* Add spacing between words */
+    line-height: 1.5; /* Adjust line spacing for multi-line text */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Ensure bold styling */
+    margin: 20px 0; /* Adjust vertical spacing */
+    color: white; /* Text color (customize to your design) */
+}
+
+h2 {
+    font-size: 2.5rem; /* Adjust font size if needed */
+    word-spacing: 0.5em; /* Add spacing between words */
+    line-height: 1; /* Adjust line spacing for multi-line text */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Ensure bold styling */
+    margin: 20px 0; /* Adjust vertical spacing */
+    color: yellow; /* Text color (customize to your design) */
+}
+
+/* Styling for "No Pain, No Gain!" */
+p.tagline {
+    font-size: 1.5rem; /* Make the text larger */
+    font-style: italic; /* Add emphasis with italic style */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the text */
+    color: white; /* Use an appealing color (purple in this case) */
+    letter-spacing: 0.1em; /* Slightly spread the letters */
+    word-spacing: 0.3em; /* Add some spacing between words */
+    text-shadow: 2px 2px 5px red; /* Add a subtle shadow for depth */
+    margin-top: 20px; /* Add spacing above the text */
+}
+
+.button {
+    background-color: hotpink;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: greenyellow;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black; /* Black background for the page */
+    color: white; /* Default text color */
+}
+
+/* Gallery Image Container */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap; /* Stack images vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 20px; /* Space between images */
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* Styling for each individual image */
+.gallery-image, .animated-image {
+    width: 100%; /* Ensure the images fill the width of the container */
+    max-width: 500px; /* Set a max width for the images to make them smaller */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 15px; /* Rounded corners for a soft look */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    object-fit: cover; /* Ensures images cover the area while maintaining aspect ratio */
+}
+
+/* Styling for animated images */
+.animated-image {
+    animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+/* Keyframe animation for floating effect */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

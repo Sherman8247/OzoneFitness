@@ -7,11 +7,15 @@
 
 @inject UserManager<IdentityUser> UserManager
 @inject IdentityRedirectManager RedirectManager
+@inject NavigationManager NavigationManager  
 
 <PageTitle>Confirm email</PageTitle>
 
 <h1>Confirm email</h1>
 <StatusMessage Message="@statusMessage" />
+
+<!-- Add the Button to go back to the Main Page -->
+<a href="/">Back to Main Menu</a>
 
 @code {
     private string? statusMessage;

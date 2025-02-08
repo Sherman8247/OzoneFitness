@@ -1,0 +1,81 @@
+﻿@page "/aboutusnologin"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using OzoneFitness.Domain
+@using OzoneFitness.Data
+@inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+
+<PageTitle>About Us</PageTitle>
+<body>
+
+</body>
+
+<!-- Top Bar Navigation with Logo -->
+<div class="top-bar">
+     <h1 class="logo">Ozone Gym</h1>
+    <nav class="nav-links">
+        <a href="/promo">Promotion</a>
+        <a href="/aboutusnologin">About Us</a>
+        <a href="/contactusnologin">Contact Us</a>
+        <a href="/">Back to Main Menu</a>
+    </nav>
+</div>
+
+<!-- Main Content Area -->
+<div class="container">
+    <h1 class="page-title">Ozone Gym</h1>
+
+    <p class="tagline">No Pain, No Gain! Start your journey today!</p>
+
+    <section class="about-us-content">
+        <p>
+            Ozone Fitness Gym is dedicated to helping you find your inner fire and achieve the body of your dreams.
+            We provide you with top-tier certified trainers from around the world to guide you on your fitness journey.
+        </p>
+        <div class="image-gallery">
+            <img src="animated/testing.jpg" alt="Gym Image" class="animated-image" />
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Members Say</h2>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <blockquote>
+                    "Ozone Gym has completely transformed my life. The trainers are amazing, and the community is so supportive!"
+                </blockquote>
+                <p class="author">- Amos Tan, 20</p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>
+                    "The best fitness experience I've had! The personalized training programs really helped me reach my goals."
+                </blockquote>
+                <p class="author">- David Lee, 23</p>
+
+                <div class="image-gallery">
+                    <img src="images/gym1.jpg" alt="Gym Image" class="gallery-image" />
+                    <p>
+                        David Lee, running the threadmill, enduring the vigourous running regime.
+                    </p>
+
+                    <img src="images/gym2.jpg" alt="Gym Image" class="gallery-image" />
+                    <p>
+                        Amos Tan, carrying the heavy weights, training hard and never giving up.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2025 Ozone Gym. All rights reserved.</p>
+</footer>
+
+<!-- Link to external CSS -->
+<link rel="stylesheet" href="css/Index.Razor.css">
+
+@code {
+}

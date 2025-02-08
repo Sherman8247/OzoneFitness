@@ -2,8 +2,10 @@
 @using Microsoft.EntityFrameworkCore
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
+@inject NavigationManager NavigationManager
 
 <PageTitle>Feedbacks</PageTitle>
 
@@ -25,9 +27,13 @@
 </body>
 <h1>Feedbacks</h1>
 
-<p>
-    <a href="feedbacks/create" class="btn btn-primary">Create New</a>
-</p>
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <p>
+            <a href="feedbacks/create" class="btn btn-primary">Create New</a>
+        </p>
+    </Authorized>
+</AuthorizeView>
 
 <!-- Feedback Table -->
 <div class="container">
@@ -64,9 +70,13 @@
                         <td>@feedback.CreatedBy</td>
                         <td>@feedback.UpdatedBy</td>
                         <td>
-                            <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")" class="btn btn-info">Edit</a> |
-                            <a href="@($"feedbacks/details?id={feedback.FeedbackId}")" class="btn btn-info">Details</a> |
-                            <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")" class="btn btn-danger">Delete</a>
+                            <AuthorizeView Roles="Administrator">
+                                <Authorized>
+                                    <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")" class="btn btn-info">Edit</a>
+                                    <a href="@($"feedbacks/details?id={feedback.FeedbackId}")" class="btn btn-info">Details</a>
+                                    <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")" class="btn btn-danger">Delete</a>
+                                </Authorized>
+                            </AuthorizeView>
                         </td>
                     </tr>
                 }

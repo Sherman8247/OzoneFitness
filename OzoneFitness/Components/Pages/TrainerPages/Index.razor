@@ -1,11 +1,14 @@
 ﻿@page "/trainers"
 @using Microsoft.EntityFrameworkCore
-@using Microsoft.AspNetCore.Components.Forms
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@attribute [Authorize(Roles = "Administrator")]
 
 <PageTitle>Trainers - Ozone Gym</PageTitle>
 
@@ -30,49 +33,58 @@
 <div class="container">
     <h1>Trainers List</h1>
 
-    <p>
-        <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
-    </p>
-@if (trainers == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table table-striped trainers-table">
-        <thead>
-            <tr>
-                <th>Trainer ID</th>
-                <th>Name</th>
-                <th>Contact Info</th>
-                <th>Years of Experience</th>
-                <th>Gym</th>
-                <th>Date Created</th>
-                <th>Date Updated</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var trainer in trainers)
-            {
+    <AuthorizeView Roles="Administrator">
+        <Authorized>
+            <p>
+                <a href="trainers/create" class="btn btn-success">Create New Trainer</a>
+            </p>
+        </Authorized>
+    </AuthorizeView>
+
+    @if (trainers == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <table class="table table-striped trainers-table">
+            <thead>
                 <tr>
-                    <td>@trainer.TrainerId</td>
-                    <td>@trainer.Name</td>
-                    <td>@trainer.ContactInfo</td>
-                    <td>@trainer.YearsOfExperience</td>
-                    <td>@trainer.GymId</td>
-                    <td>@trainer.DateCreated.ToShortDateString()</td>
-                    <td>@trainer.DateUpdated.ToShortDateString()</td>
-                    <td>
-                        <a href="@($"trainers/edit?id={trainer.TrainerId}")" class="btn btn-primary btn-sm">Edit</a> |
-                        <a href="@($"trainers/details?id={trainer.TrainerId}")" class="btn btn-info btn-sm">Details</a> |
-                        <a href="@($"trainers/delete?id={trainer.TrainerId}")" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
+                    <th>Trainer ID</th>
+                    <th>Name</th>
+                    <th>Contact Info</th>
+                    <th>Years of Experience</th>
+                    <th>Gym</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var trainer in trainers)
+                {
+                    <tr>
+                        <td>@trainer.TrainerId</td>
+                        <td>@trainer.Name</td>
+                        <td>@trainer.ContactInfo</td>
+                        <td>@trainer.YearsOfExperience</td>
+                        <td>@trainer.GymId</td>
+                        <td>@trainer.DateCreated.ToShortDateString()</td>
+                        <td>@trainer.DateUpdated.ToShortDateString()</td>
+                        <td>
+                            <AuthorizeView Roles="Administrator">
+                                <Authorized>
+                                    <a href="@($"trainers/edit?id={trainer.TrainerId}")" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="@($"trainers/details?id={trainer.TrainerId}")" class="btn btn-info btn-sm">Details</a>
+                                    <a href="@($"trainers/delete?id={trainer.TrainerId}")" class="btn btn-danger btn-sm">Delete</a>
+                                </Authorized>
+                            </AuthorizeView>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
 @code {

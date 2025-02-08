@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using OzoneFitness.Domain
 @using OzoneFitness.Data
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
@@ -29,9 +30,13 @@
 
 <h1>Schedule Management</h1>
 
-<p>
-    <a href="schedules/create" class="btn btn-success">Create New Schedule</a>
-</p>
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <p>
+            <a href="schedules/create" class="btn btn-success">Create New Schedule</a>
+        </p>
+    </Authorized>
+</AuthorizeView>
 
 <table class="table table-striped schedules-table">
     <thead>
@@ -62,9 +67,13 @@
                 <td>@schedule.CreatedBy</td>
                 <td>@schedule.UpdatedBy</td>
                 <td>
-                    <a href="@($"schedules/edit?id={schedule.ScheduleId}")" class="btn btn-primary btn-sm">Edit</a> |
-                    <a href="@($"schedules/details?id={schedule.ScheduleId}")" class="btn btn-info btn-sm">Details</a> |
-                    <a href="@($"schedules/delete?id={schedule.ScheduleId}")" class="btn btn-danger btn-sm">Delete</a>
+                    <AuthorizeView Roles="Administrator">
+                        <Authorized>
+                            <a href="@($"schedules/edit?id={schedule.ScheduleId}")" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="@($"schedules/details?id={schedule.ScheduleId}")" class="btn btn-info btn-sm">Details</a>
+                            <a href="@($"schedules/delete?id={schedule.ScheduleId}")" class="btn btn-danger btn-sm">Delete</a>
+                        </Authorized>
+                    </AuthorizeView>
                 </td>
             </tr>
         }
