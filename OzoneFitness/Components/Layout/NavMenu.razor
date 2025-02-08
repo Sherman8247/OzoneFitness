@@ -1,77 +1,89 @@
-﻿@page "/NavMenu"
-@inject NavigationManager Navigation
+﻿@implements IDisposable
+@inject NavigationManager NavigationManager
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Navigation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">OzoneFitness</a>
+    </div>
+</div>
 
-        .nav-container {
-            background-color: hotpink;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-            .nav-container h3 {
-                margin-bottom: 20px;
-                font-size: 24px;
-                color: #333;
-            }
+<!--Code that Defines the Nav Menu-->
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
 
-            .nav-container button {
-                width: 100%;
-                padding: 10px;
-                background-color: lawngreen;
-                color: black;
-                border: none;
-                border-radius: 5px;
-                font-size: 16px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            }
+        <AuthorizeView Context="authContext">
+            <!-- Explicitly name the context parameter -->
+            <!--Authenticated (Signed In) means they are authorized-->
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Account/Manage">
+                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @authContext.User.Identity?.Name
+                    </NavLink>
+                </div>
 
-                .nav-container button:hover {
-                    background-color: #0056b3;
-                }
+                <AuthorizeView Roles="Administrator">
+                    <Authorized>
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="schedules">
+                                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Schedule Page
+                            </NavLink>
+                        </div>
 
-            .nav-container p {
-                margin-top: 10px;
-                font-size: 14px;
-            }
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="aboutus">
+                                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> About Us
+                            </NavLink>
+                        </div>
 
-                .nav-container p a {
-                    color: #007BFF;
-                    text-decoration: none;
-                }
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="contacts">
+                                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Contact Us
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <!-- Optional: Display something if not an admin, or just hide -->
+                        <!-- <p>Admin content hidden.</p> -->
+                    </NotAuthorized>
+                </AuthorizeView>
+            </Authorized>
 
-                    .nav-container p a:hover {
-                        text-decoration: underline;
-                    }
-    </style>
-</head>
+            <!--Unauthenticated (Signed out) means they are unauthorized-->
+            <NotAuthorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Account/Login">
+                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
+                    </NavLink>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
 
-<div class="nav-container">
-    <h3>Welcome to Ozone Gym</h3>
-    <button @onclick="NavigateToCustomers">Go to Customers</button>
+    </nav>
 </div>
 
 @code {
-    private void NavigateToCustomers()
+    private string? currentUrl;
+    protected override void OnInitialized()
     {
-        // Navigate to the customers page
-        Navigation.NavigateTo("/customers");
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
 }
