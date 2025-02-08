@@ -1,0 +1,93 @@
+﻿body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: black;
+    color: white;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Promo container */
+.promo-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Promo banner */
+.promo-banner {
+    background-color: #EA4C89;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.promo-title {
+    font-size: 2.5rem;
+    color: white;
+    margin: 0;
+}
+
+.promo-subtitle {
+    font-size: 1.2rem;
+    color: #FFF8F0;
+    margin-top: 10px;
+}
+
+/* Promo details */
+.promo-details {
+    margin: 20px 0;
+    text-align: left;
+}
+
+    .promo-details h2 {
+        font-size: 2rem;
+        color: #4BBF73;
+        margin-bottom: 10px;
+    }
+
+.promo-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+    .promo-benefits li {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #ccc;
+    }
+
+/* Call-to-action */
+.promo-action {
+    margin-top: 20px;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    color: #FFF8F0;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #EA4C89;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #D03670;
+    }

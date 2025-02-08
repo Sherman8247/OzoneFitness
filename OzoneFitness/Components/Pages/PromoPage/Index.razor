@@ -1,0 +1,39 @@
+﻿@page "/promo"
+
+<PageTitle>Promotion</PageTitle>
+
+<body>
+    <div class="promo-container">
+        <!-- Promo Banner -->
+        <div class="promo-banner">
+            <h1 class="promo-title">Exclusive Offer!</h1>
+            <p class="promo-subtitle">Get 50% Off Your Membership for the First Month</p>
+        </div>
+
+        <!-- Promo Details -->
+        <div class="promo-details">
+            <h2>Why Join Us?</h2>
+            <ul class="promo-benefits">
+                <li>Access to state-of-the-art equipment</li>
+                <li>Expert personal trainers</li>
+                <li>Wide range of classes, including yoga, Zumba, and strength training</li>
+                <li>Open 24/7 for your convenience</li>
+            </ul>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="promo-action">
+            <p class="cta-text">Don't miss out on this amazing deal. Offer valid until <strong>February 28, 2025</strong>.</p>
+            <a href="/Account/Register" class="btn btn-primary">Sign Up Now</a>
+        </div>
+    </div>
+</body>
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateToPromo()
+    {
+        NavigationManager.NavigateTo("/promo");
+    }
+}
