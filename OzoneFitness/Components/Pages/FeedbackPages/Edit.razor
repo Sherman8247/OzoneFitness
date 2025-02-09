@@ -4,12 +4,17 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Edit</PageTitle>
+<PageTitle>Edit Feedback</PageTitle>
+<link rel="stylesheet" href="css/Edit.razor.css">
 
 <h1>Edit</h1>
+<body>
+
+</body>
 
 <h2>Feedback</h2>
 <hr />
+
 @if (Feedback is null)
 {
     <p><em>Loading...</em></p>
@@ -20,58 +25,68 @@ else
         <div class="col-md-4">
             <EditForm method="post" Model="Feedback" OnValidSubmit="UpdateFeedback" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
-                <ValidationSummary role="alert"/>
-                <input type="hidden" name="Feedback.ID" value="@Feedback.Id" />
+                <ValidationSummary role="alert" />
+
                 <div class="mb-3">
-                    <label for="feedbackid" class="form-label">FeedbackId:</label>
+                    <label for="feedbackid" class="form-label">Feedback ID:</label>
                     <InputNumber id="feedbackid" @bind-Value="Feedback.FeedbackId" class="form-control" />
                     <ValidationMessage For="() => Feedback.FeedbackId" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
                     <label for="rating" class="form-label">Rating:</label>
                     <InputNumber id="rating" @bind-Value="Feedback.Rating" class="form-control" />
                     <ValidationMessage For="() => Feedback.Rating" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
                     <label for="comments" class="form-label">Comments:</label>
                     <InputText id="comments" @bind-Value="Feedback.Comments" class="form-control" />
                     <ValidationMessage For="() => Feedback.Comments" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="dateofsubmission" class="form-label">DateOfSubmission:</label>
+                    <label for="dateofsubmission" class="form-label">Date of Submission:</label>
                     <InputDate id="dateofsubmission" @bind-Value="Feedback.DateOfSubmission" class="form-control" />
                     <ValidationMessage For="() => Feedback.DateOfSubmission" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="trainerid" class="form-label">TrainerId:</label>
+                    <label for="trainerid" class="form-label">Trainer ID:</label>
                     <InputNumber id="trainerid" @bind-Value="Feedback.TrainerId" class="form-control" />
                     <ValidationMessage For="() => Feedback.TrainerId" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="customerid" class="form-label">CustomerId:</label>
+                    <label for="customerid" class="form-label">Customer ID:</label>
                     <InputNumber id="customerid" @bind-Value="Feedback.CustomerId" class="form-control" />
                     <ValidationMessage For="() => Feedback.CustomerId" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="datecreated" class="form-label">DateCreated:</label>
+                    <label for="datecreated" class="form-label">Date Created:</label>
                     <InputDate id="datecreated" @bind-Value="Feedback.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Feedback.DateCreated" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="dateupdated" class="form-label">DateUpdated:</label>
+                    <label for="dateupdated" class="form-label">Date Updated:</label>
                     <InputDate id="dateupdated" @bind-Value="Feedback.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Feedback.DateUpdated" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="createdby" class="form-label">CreatedBy:</label>
+                    <label for="createdby" class="form-label">Created By:</label>
                     <InputText id="createdby" @bind-Value="Feedback.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Feedback.CreatedBy" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="updatedby" class="form-label">UpdatedBy:</label>
+                    <label for="updatedby" class="form-label">Updated By:</label>
                     <InputText id="updatedby" @bind-Value="Feedback.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Feedback.UpdatedBy" class="text-danger" />
                 </div>
+
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
@@ -86,13 +101,19 @@ else
     [SupplyParameterFromQuery]
     private int ID { get; set; }
 
-    [SupplyParameterFromForm]
+    //[SupplyParameterFromForm] // REMOVE THIS LINE
     private Feedback? Feedback { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        if (ID == 0) // Or some other invalid value check
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
+
         using var context = DbFactory.CreateDbContext();
-        Feedback ??= await context.Feedback.FirstOrDefaultAsync(m => m.FeedbackId == ID);
+        Feedback = await context.Feedback.FirstOrDefaultAsync(m => m.Id == ID); // Corrected:  Use primary key Id
 
         if (Feedback is null)
         {
@@ -100,8 +121,6 @@ else
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateFeedback()
     {
         using var context = DbFactory.CreateDbContext();
@@ -113,14 +132,9 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!FeedbackExists(Feedback!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            Console.WriteLine("Data has been modified by another user.");
+            NavigationManager.NavigateTo($"/feedbacks/edit?ID={ID}", forceLoad: true); // Refresh the page
+            return;
         }
 
         NavigationManager.NavigateTo("/feedbacks");

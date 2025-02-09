@@ -4,7 +4,8 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Edit</PageTitle>
+<PageTitle>Edit Schedule</PageTitle>
+<link rel="stylesheet" href="css/Edit.razor.css">
 
 <h1>Edit</h1>
 <body>
@@ -22,53 +23,62 @@ else
         <div class="col-md-4">
             <EditForm method="post" Model="Schedule" OnValidSubmit="UpdateSchedule" FormName="edit" Enhance>
                 <DataAnnotationsValidator />
-                <ValidationSummary role="alert"/>
-                <input type="hidden" name="Schedule.ID" value="@Schedule.Id" />
+                <ValidationSummary role="alert" />
+
                 <div class="mb-3">
-                    <label for="scheduleid" class="form-label">ScheduleId:</label>
+                    <label for="scheduleid" class="form-label">Schedule ID:</label>
                     <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleId" class="form-control" />
                     <ValidationMessage For="() => Schedule.ScheduleId" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="dayofweek" class="form-label">DayOfWeek:</label>
+                    <label for="dayofweek" class="form-label">Day of Week:</label>
                     <InputText id="dayofweek" @bind-Value="Schedule.DayOfWeek" class="form-control" />
                     <ValidationMessage For="() => Schedule.DayOfWeek" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="starttime" class="form-label">StartTime:</label>
+                    <label for="starttime" class="form-label">Start Time:</label>
                     <InputText id="starttime" @bind-Value="Schedule.StartTime" class="form-control" />
                     <ValidationMessage For="() => Schedule.StartTime" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="endtime" class="form-label">EndTime:</label>
+                    <label for="endtime" class="form-label">End Time:</label>
                     <InputText id="endtime" @bind-Value="Schedule.EndTime" class="form-control" />
                     <ValidationMessage For="() => Schedule.EndTime" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="trainerid" class="form-label">TrainerId:</label>
+                    <label for="trainerid" class="form-label">Trainer ID:</label>
                     <InputNumber id="trainerid" @bind-Value="Schedule.TrainerId" class="form-control" />
                     <ValidationMessage For="() => Schedule.TrainerId" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="datecreated" class="form-label">DateCreated:</label>
+                    <label for="datecreated" class="form-label">Date Created:</label>
                     <InputDate id="datecreated" @bind-Value="Schedule.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Schedule.DateCreated" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="dateupdated" class="form-label">DateUpdated:</label>
+                    <label for="dateupdated" class="form-label">Date Updated:</label>
                     <InputDate id="dateupdated" @bind-Value="Schedule.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Schedule.DateUpdated" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="createdby" class="form-label">CreatedBy:</label>
+                    <label for="createdby" class="form-label">Created By:</label>
                     <InputText id="createdby" @bind-Value="Schedule.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Schedule.CreatedBy" class="text-danger" />
                 </div>
+
                 <div class="mb-3">
-                    <label for="updatedby" class="form-label">UpdatedBy:</label>
+                    <label for="updatedby" class="form-label">Updated By:</label>
                     <InputText id="updatedby" @bind-Value="Schedule.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Schedule.UpdatedBy" class="text-danger" />
                 </div>
+
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
@@ -83,13 +93,19 @@ else
     [SupplyParameterFromQuery]
     private int ID { get; set; }
 
-    [SupplyParameterFromForm]
+    //[SupplyParameterFromForm] // REMOVE THIS LINE
     private Schedule? Schedule { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        if (ID == 0) // Or some other invalid value check
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
+
         using var context = DbFactory.CreateDbContext();
-        Schedule ??= await context.Schedule.FirstOrDefaultAsync(m => m.ScheduleId == ID);
+        Schedule = await context.Schedule.FirstOrDefaultAsync(m => m.Id == ID); // Use the primary key (Id)
 
         if (Schedule is null)
         {
@@ -97,8 +113,6 @@ else
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateSchedule()
     {
         using var context = DbFactory.CreateDbContext();
@@ -110,14 +124,9 @@ else
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!ScheduleExists(Schedule!.Id))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
+            Console.WriteLine("Data has been modified by another user.");
+            NavigationManager.NavigateTo($"/schedules/edit?ID={ID}", forceLoad: true); // Refresh
+            return;
         }
 
         NavigationManager.NavigateTo("/schedules");

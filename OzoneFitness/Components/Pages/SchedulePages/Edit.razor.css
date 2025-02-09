@@ -7,22 +7,6 @@
     align-items: center;
 }
 
-.container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: black;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Centers the form vertically */
-}
-
 h1, h2 {
     font-size: 2rem;
     color: #EA4C89;
