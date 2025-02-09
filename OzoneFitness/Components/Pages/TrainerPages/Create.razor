@@ -3,7 +3,7 @@
 @using OzoneFitness.Domain
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
-
+@rendermode InteractiveServer
 <PageTitle>Create</PageTitle>
 
 <h1>Create</h1>
@@ -64,8 +64,19 @@
                 <label for="trainerImage" class="form-label">Upload Image:</label>
                 <InputFile id="trainerImage" OnChange="UploadImage" class="form-control" />
             </div>
+            <div class="image-preview">
+                @if (!string.IsNullOrEmpty(previewImage))
+                {
+                    <img src="@previewImage" alt="Image Preview" class="img-preview" />
+                }
+                else
+                {
+                    <p>No image selected.</p>
+                }
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
+
     </div>
 </div>
 
@@ -76,7 +87,7 @@
 @code {
     [SupplyParameterFromForm]
     private Trainer Trainer { get; set; } = new();
-    
+    private string? previewImage;
     private IBrowserFile? uploadedFile;
 
     private async Task UploadImage(InputFileChangeEventArgs e)
@@ -87,6 +98,9 @@
             using var stream = new MemoryStream();
             await file.OpenReadStream(maxAllowedSize: 10_000_000).CopyToAsync(stream);
             Trainer.Image = stream.ToArray();
+
+            // Generate Base64 string for preview
+            previewImage = $"data:{file.ContentType};base64,{Convert.ToBase64String(stream.ToArray())}";
 
             // Debug log
             Console.WriteLine($"Image selected: {Trainer.Image.Length} bytes");
@@ -116,14 +130,5 @@
 
         NavigationManager.NavigateTo("/trainers");
     }
-    private async Task SaveTrainer()
-    {
-        if (Trainer != null)
-        {
-            using var context = DbFactory.CreateDbContext();
-            context.Trainer.Add(Trainer); // Add the Trainer entity, which includes the Image
-            await context.SaveChangesAsync(); // Save changes to the database
-            NavigationManager.NavigateTo("/trainers"); // Redirect to the trainers list page
-        }
-    }
+    
 }

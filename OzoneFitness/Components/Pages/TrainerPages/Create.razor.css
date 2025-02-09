@@ -84,3 +84,13 @@ a {
         text-decoration: underline;
         color: #3B9E5D;
     }
+.image-preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.img-preview {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
