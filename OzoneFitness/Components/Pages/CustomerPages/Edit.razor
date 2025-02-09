@@ -18,7 +18,7 @@
         }
         else
         {
-            <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer">
+            <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer" FormName="editCustomerForm" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert" />
 
@@ -109,7 +109,9 @@
     private async Task UpdateCustomer()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Attach(Customer!).State = EntityState.Modified;
+        //context.Attach(Customer!).State = EntityState.Modified; //REMOVED
+
+        context.Update(Customer!); // UPDATED
 
         try
         {

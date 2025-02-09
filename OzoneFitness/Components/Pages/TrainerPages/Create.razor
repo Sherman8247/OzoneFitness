@@ -4,79 +4,95 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
-<PageTitle>Create</PageTitle>
+
+<PageTitle>Create Trainer</PageTitle>
+<link rel="stylesheet" href="TrainersCreate.razor.css" /> @* Link to the CSS *@
 
 <h1>Create</h1>
-<body></body>
 <h2>Trainer</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm method="post" Model="Trainer" OnValidSubmit="AddTrainer" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
-            <div class="mb-3">
-                <label for="trainerid" class="form-label">TrainerId:</label>
-                <InputNumber id="trainerid" @bind-Value="Trainer.TrainerId" class="form-control" />
-                <ValidationMessage For="() => Trainer.TrainerId" class="text-danger" />
-            </div>        
-            <div class="mb-3">
-                <label for="name" class="form-label">Name:</label> 
-                <InputText id="name" @bind-Value="Trainer.Name" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.Name" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="contactinfo" class="form-label">ContactInfo:</label> 
-                <InputText id="contactinfo" @bind-Value="Trainer.ContactInfo" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.ContactInfo" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="yearsofexperience" class="form-label">YearsOfExperience:</label> 
-                <InputNumber id="yearsofexperience" @bind-Value="Trainer.YearsOfExperience" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.YearsOfExperience" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="gymid" class="form-label">GymId:</label>
-                <InputNumber id="gymid" @bind-Value="Trainer.GymId" class="form-control" />
-                <ValidationMessage For="() => Trainer.GymId" class="text-danger" />
-            </div>        
-            <div class="mb-3">
-                <label for="datecreated" class="form-label">DateCreated:</label> 
-                <InputDate id="datecreated" @bind-Value="Trainer.DateCreated" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.DateCreated" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="dateupdated" class="form-label">DateUpdated:</label> 
-                <InputDate id="dateupdated" @bind-Value="Trainer.DateUpdated" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.DateUpdated" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="createdby" class="form-label">CreatedBy:</label> 
-                <InputText id="createdby" @bind-Value="Trainer.CreatedBy" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.CreatedBy" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="updatedby" class="form-label">UpdatedBy:</label> 
-                <InputText id="updatedby" @bind-Value="Trainer.UpdatedBy" class="form-control" /> 
-                <ValidationMessage For="() => Trainer.UpdatedBy" class="text-danger" /> 
-            </div>
-            <div class="mb-3">
-                <label for="trainerImage" class="form-label">Upload Image:</label>
-                <InputFile id="trainerImage" OnChange="UploadImage" class="form-control" />
-            </div>
-            <div class="image-preview">
-                @if (!string.IsNullOrEmpty(previewImage))
-                {
-                    <img src="@previewImage" alt="Image Preview" class="img-preview" />
-                }
-                else
-                {
-                    <p>No image selected.</p>
-                }
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
 
+<div class="container">
+    @* Main container for styling *@
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Trainer" OnValidSubmit="AddTrainer" FormName="create" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
+
+                <div class="mb-3">
+                    <label for="trainerid" class="form-label">Trainer ID:</label>
+                    <InputNumber id="trainerid" @bind-Value="Trainer.TrainerId" class="form-control" />
+                    <ValidationMessage For="() => Trainer.TrainerId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <InputText id="name" @bind-Value="Trainer.Name" class="form-control" />
+                    <ValidationMessage For="() => Trainer.Name" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="contactinfo" class="form-label">Contact Info:</label>
+                    <InputText id="contactinfo" @bind-Value="Trainer.ContactInfo" class="form-control" />
+                    <ValidationMessage For="() => Trainer.ContactInfo" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="yearsofexperience" class="form-label">Years of Experience:</label>
+                    <InputNumber id="yearsofexperience" @bind-Value="Trainer.YearsOfExperience" class="form-control" />
+                    <ValidationMessage For="() => Trainer.YearsOfExperience" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="gymid" class="form-label">Gym ID:</label>
+                    <InputNumber id="gymid" @bind-Value="Trainer.GymId" class="form-control" />
+                    <ValidationMessage For="() => Trainer.GymId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="datecreated" class="form-label">Date Created:</label>
+                    <InputDate id="datecreated" @bind-Value="Trainer.DateCreated" class="form-control" />
+                    <ValidationMessage For="() => Trainer.DateCreated" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateupdated" class="form-label">Date Updated:</label>
+                    <InputDate id="dateupdated" @bind-Value="Trainer.DateUpdated" class="form-control" />
+                    <ValidationMessage For="() => Trainer.DateUpdated" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="createdby" class="form-label">Created By:</label>
+                    <InputText id="createdby" @bind-Value="Trainer.CreatedBy" class="form-control" />
+                    <ValidationMessage For="() => Trainer.CreatedBy" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="updatedby" class="form-label">Updated By:</label>
+                    <InputText id="updatedby" @bind-Value="Trainer.UpdatedBy" class="form-control" />
+                    <ValidationMessage For="() => Trainer.UpdatedBy" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="trainerImage" class="form-label">Upload Image:</label>
+                    <InputFile id="trainerImage" OnChange="UploadImage" class="form-control" />
+                </div>
+                @* Image Preview Section *@
+                <div class="image-preview">
+                    @if (!string.IsNullOrEmpty(previewImage))
+                    {
+                        <img src="@previewImage" alt="Image Preview" class="img-preview" />
+                    }
+                    else
+                    {
+                        <p>No image selected.</p>
+                    }
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </EditForm>
+        </div>
     </div>
 </div>
 
@@ -87,6 +103,7 @@
 @code {
     [SupplyParameterFromForm]
     private Trainer Trainer { get; set; } = new();
+
     private string? previewImage;
     private IBrowserFile? uploadedFile;
 
@@ -110,25 +127,14 @@
             Console.WriteLine("No image uploaded.");
         }
     }
-    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+
     private async Task AddTrainer()
     {
         using var context = DbFactory.CreateDbContext();
-
-        // Debug log before saving
-        if (Trainer.Image != null)
-        {
-            Console.WriteLine($"Saving Image: {Trainer.Image.Length} bytes");
-        }
-        else
-        {
-            Console.WriteLine("No image data found before saving.");
-        }
 
         context.Trainer.Add(Trainer);
         await context.SaveChangesAsync();
 
         NavigationManager.NavigateTo("/trainers");
     }
-    
 }

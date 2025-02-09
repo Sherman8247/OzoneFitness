@@ -8,9 +8,6 @@
 <link rel="stylesheet" href="css/Edit.razor.css">
 
 <h1>Edit</h1>
-<body>
-
-</body>
 
 <h2>Feedback</h2>
 <hr />
@@ -23,13 +20,15 @@ else
 {
     <div class="row">
         <div class="col-md-4">
-            <EditForm method="post" Model="Feedback" OnValidSubmit="UpdateFeedback" FormName="edit" Enhance>
+            <EditForm Model="Feedback" OnValidSubmit="UpdateFeedback" FormName="editFeedbackForm" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert" />
 
+                <input type="hidden" name="Feedback.FeedbackId" value="@Feedback.FeedbackId" />
+
                 <div class="mb-3">
                     <label for="feedbackid" class="form-label">Feedback ID:</label>
-                    <InputNumber id="feedbackid" @bind-Value="Feedback.FeedbackId" class="form-control" />
+                    <InputNumber id="feedbackid" @bind-Value="Feedback.FeedbackId" class="form-control" readonly />
                     <ValidationMessage For="() => Feedback.FeedbackId" class="text-danger" />
                 </div>
 
@@ -100,22 +99,20 @@ else
 @code {
     [SupplyParameterFromQuery]
     private int ID { get; set; }
-
-    //[SupplyParameterFromForm] // REMOVE THIS LINE
     private Feedback? Feedback { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if (ID == 0) // Or some other invalid value check
+        if (ID == 0) // Validate the ID if needed
         {
             NavigationManager.NavigateTo("notfound");
             return;
         }
 
         using var context = DbFactory.CreateDbContext();
-        Feedback = await context.Feedback.FirstOrDefaultAsync(m => m.Id == ID); // Corrected:  Use primary key Id
+        Feedback = await context.Feedback.FirstOrDefaultAsync(m => m.FeedbackId == ID);
 
-        if (Feedback is null)
+        if (Feedback == null)
         {
             NavigationManager.NavigateTo("notfound");
         }
@@ -123,26 +120,42 @@ else
 
     private async Task UpdateFeedback()
     {
+        if (Feedback == null) return;
+
         using var context = DbFactory.CreateDbContext();
-        context.Attach(Feedback!).State = EntityState.Modified;
 
-        try
+        // Ensure the entity is tracked and its state is marked as modified
+        var existingFeedback = await context.Feedback
+            .FirstOrDefaultAsync(f => f.FeedbackId == Feedback.FeedbackId);
+
+        if (existingFeedback != null)
         {
-            await context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            Console.WriteLine("Data has been modified by another user.");
-            NavigationManager.NavigateTo($"/feedbacks/edit?ID={ID}", forceLoad: true); // Refresh the page
-            return;
-        }
+            // Manually update the fields with the new values
+            existingFeedback.Rating = Feedback.Rating;
+            existingFeedback.Comments = Feedback.Comments;
+            existingFeedback.DateOfSubmission = Feedback.DateOfSubmission;
+            existingFeedback.TrainerId = Feedback.TrainerId;
+            existingFeedback.CustomerId = Feedback.CustomerId;
+            existingFeedback.DateCreated = Feedback.DateCreated;
+            existingFeedback.DateUpdated = Feedback.DateUpdated;
+            existingFeedback.CreatedBy = Feedback.CreatedBy;
+            existingFeedback.UpdatedBy = Feedback.UpdatedBy;
 
-        NavigationManager.NavigateTo("/feedbacks");
-    }
+            // Mark entity state as modified
+            context.Entry(existingFeedback).State = EntityState.Modified;
 
-    private bool FeedbackExists(int id)
-    {
-        using var context = DbFactory.CreateDbContext();
-        return context.Feedback.Any(e => e.Id == id);
+            try
+            {
+                // Commit the changes to the database
+                await context.SaveChangesAsync();
+                StateHasChanged(); // Refresh the page to reflect updated data
+                NavigationManager.NavigateTo("/feedbacks");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Data has been modified by another user.");
+                NavigationManager.NavigateTo($"/feedbacks/edit?ID={ID}", forceLoad: true); // Reload page on concurrency error
+            }
+        }
     }
 }

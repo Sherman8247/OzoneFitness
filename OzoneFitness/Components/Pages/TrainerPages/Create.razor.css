@@ -1,4 +1,4 @@
-﻿﻿ /* General styling for create page */
+﻿/* General styling for create page */
 body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
@@ -45,6 +45,7 @@ p {
 
 .form-control {
     width: 100%;
+    /* max-width: 400px; REMOVE THIS LINE */
     padding: 10px;
     background-color: #333;
     border: 1px solid #555;
@@ -84,13 +85,17 @@ a {
         text-decoration: underline;
         color: #3B9E5D;
     }
+/*Image preview container*/
 .image-preview {
-    margin-top: 20px;
-    text-align: center;
+    margin-top: 10px;
+    text-align: center; /* Center the content */
 }
 
+/* Preview image style */
 .img-preview {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%; /* Ensure the image does not exceed its container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: Rounded corners */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block; /* Required for margin auto to work */
+}
