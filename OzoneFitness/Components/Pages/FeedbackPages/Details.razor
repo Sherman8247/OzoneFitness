@@ -7,7 +7,7 @@
 <PageTitle>Details</PageTitle>
 
 <h1>Details</h1>
-
+<body></body>
 <div>
     <h2>Feedback</h2>
     <hr />
@@ -39,7 +39,7 @@
             <dd class="col-sm-10">@feedback.UpdatedBy</dd>
         </dl>
         <div>
-            <a href="@($"/feedbacks/edit?id={feedback.FeedbackId}")">Edit</a>
+            <a href="@($"/feedbacks/edit?id={feedback.FeedbackId}")" class=" btn btn-danger">Edit</a>
             <a href="@($"/feedbacks")">Back to List</a>
         </div>
     }
