@@ -1,15 +1,8 @@
 ﻿/* General styling for the page */
-body {
-    margin: 0;
-    font-family: 'Poppins', Arial, sans-serif;
-    background-color: black; / Black background /
-    color: white;
-    line-height: 1.6;
-}
+
 
 /* Main container */
-/* Main container */
-.row {
+.container {
     max-width: 800px;
     margin: 50px auto;
     padding: 30px;
@@ -70,7 +63,7 @@ button.btn {
     background-color: #EA4C89; /* Pink for the submit button */
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color: 0.3s ease;
 }
 
     button.btn:hover {
@@ -87,4 +80,4 @@ a {
 
     a:hover {
         color: #3B9E5D; /* Darker green on hover */
-}
+    }

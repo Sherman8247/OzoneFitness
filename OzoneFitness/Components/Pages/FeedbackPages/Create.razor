@@ -4,69 +4,87 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Create</PageTitle>
+<PageTitle>Create Feedback</PageTitle>
+<link rel="stylesheet" href="FeedbacksCreate.razor.css" />  @* Link to the CSS file *@
 
 <h1>Create</h1>
 
 <h2>Feedback</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm method="post" Model="Feedback" OnValidSubmit="AddFeedback" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
-            <div class="mb-3">
-                <label for="feedbackid" class="form-label">FeedbackId:</label>
-                <InputNumber id="feedbackid" @bind-Value="Feedback.FeedbackId" class="form-control" />
-                <ValidationMessage For="() => Feedback.FeedbackId" class="text-danger" />
-            </div>        
-            <div class="mb-3">
-                <label for="rating" class="form-label">Rating:</label> 
-                <InputNumber id="rating" @bind-Value="Feedback.Rating" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.Rating" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="comments" class="form-label">Comments:</label> 
-                <InputText id="comments" @bind-Value="Feedback.Comments" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.Comments" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="dateofsubmission" class="form-label">DateOfSubmission:</label> 
-                <InputDate id="dateofsubmission" @bind-Value="Feedback.DateOfSubmission" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.DateOfSubmission" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="trainerid" class="form-label">TrainerId:</label>
-                <InputNumber id="trainerid" @bind-Value="Feedback.TrainerId" class="form-control" />
-                <ValidationMessage For="() => Feedback.TrainerId" class="text-danger" />
-            </div>        
-            <div class="mb-3">
-                <label for="customerid" class="form-label">CustomerId:</label>
-                <InputNumber id="customerid" @bind-Value="Feedback.CustomerId" class="form-control" />
-                <ValidationMessage For="() => Feedback.CustomerId" class="text-danger" />
-            </div>        
-            <div class="mb-3">
-                <label for="datecreated" class="form-label">DateCreated:</label> 
-                <InputDate id="datecreated" @bind-Value="Feedback.DateCreated" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.DateCreated" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="dateupdated" class="form-label">DateUpdated:</label> 
-                <InputDate id="dateupdated" @bind-Value="Feedback.DateUpdated" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.DateUpdated" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="createdby" class="form-label">CreatedBy:</label> 
-                <InputText id="createdby" @bind-Value="Feedback.CreatedBy" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.CreatedBy" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="updatedby" class="form-label">UpdatedBy:</label> 
-                <InputText id="updatedby" @bind-Value="Feedback.UpdatedBy" class="form-control" /> 
-                <ValidationMessage For="() => Feedback.UpdatedBy" class="text-danger" /> 
-            </div>        
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
+
+<div class="container">
+    @* Main container with background and styling *@
+    <div class="row">
+        @* Bootstrap row for horizontal alignment *@
+        <div class="col-md-4">
+            @* Bootstrap column for responsiveness *@
+            <EditForm method="post" Model="Feedback" OnValidSubmit="AddFeedback" FormName="create" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
+
+                <div class="mb-3">
+                    <label for="feedbackid" class="form-label">Feedback ID:</label>
+                    <InputNumber id="feedbackid" @bind-Value="Feedback.FeedbackId" class="form-control" />
+                    <ValidationMessage For="() => Feedback.FeedbackId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating:</label>
+                    <InputNumber id="rating" @bind-Value="Feedback.Rating" class="form-control" />
+                    <ValidationMessage For="() => Feedback.Rating" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="comments" class="form-label">Comments:</label>
+                    <InputText id="comments" @bind-Value="Feedback.Comments" class="form-control" />
+                    <ValidationMessage For="() => Feedback.Comments" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateofsubmission" class="form-label">Date of Submission:</label>
+                    <InputDate id="dateofsubmission" @bind-Value="Feedback.DateOfSubmission" class="form-control" />
+                    <ValidationMessage For="() => Feedback.DateOfSubmission" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="trainerid" class="form-label">Trainer ID:</label>
+                    <InputNumber id="trainerid" @bind-Value="Feedback.TrainerId" class="form-control" />
+                    <ValidationMessage For="() => Feedback.TrainerId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="customerid" class="form-label">Customer ID:</label>
+                    <InputNumber id="customerid" @bind-Value="Feedback.CustomerId" class="form-control" />
+                    <ValidationMessage For="() => Feedback.CustomerId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="datecreated" class="form-label">Date Created:</label>
+                    <InputDate id="datecreated" @bind-Value="Feedback.DateCreated" class="form-control" />
+                    <ValidationMessage For="() => Feedback.DateCreated" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateupdated" class="form-label">Date Updated:</label>
+                    <InputDate id="dateupdated" @bind-Value="Feedback.DateUpdated" class="form-control" />
+                    <ValidationMessage For="() => Feedback.DateUpdated" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="createdby" class="form-label">Created By:</label>
+                    <InputText id="createdby" @bind-Value="Feedback.CreatedBy" class="form-control" />
+                    <ValidationMessage For="() => Feedback.CreatedBy" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="updatedby" class="form-label">Updated By:</label>
+                    <InputText id="updatedby" @bind-Value="Feedback.UpdatedBy" class="form-control" />
+                    <ValidationMessage For="() => Feedback.UpdatedBy" class="text-danger" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </EditForm>
+        </div>
     </div>
 </div>
 
@@ -78,7 +96,6 @@
     [SupplyParameterFromForm]
     private Feedback Feedback { get; set; } = new();
 
-    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddFeedback()
     {
         using var context = DbFactory.CreateDbContext();
