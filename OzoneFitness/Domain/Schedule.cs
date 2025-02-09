@@ -2,6 +2,7 @@
 
 public class Schedule : BaseDomainBooking
 {
+
     public int ScheduleId { get; set; }
     public string DayOfWeek { get; set; }
     public string StartTime { get; set; }

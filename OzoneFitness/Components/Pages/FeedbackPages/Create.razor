@@ -5,22 +5,21 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Create Feedback</PageTitle>
-<link rel="stylesheet" href="FeedbacksCreate.razor.css" />  @* Link to the CSS file *@
-
-<h1>Create</h1>
-
-<h2>Feedback</h2>
-<hr />
+<link rel="stylesheet" href="css/Edit.razor.css" />  @* Link to the CSS file *@
 
 <div class="container">
     @* Main container with background and styling *@
+    <h1>Create Feedback</h1>
+    <h2>New Feedback</h2>
+    <hr />
+
     <div class="row">
         @* Bootstrap row for horizontal alignment *@
-        <div class="col-md-4">
+        <div class="col-md-6 offset-md-3">
             @* Bootstrap column for responsiveness *@
-            <EditForm method="post" Model="Feedback" OnValidSubmit="AddFeedback" FormName="create" Enhance>
+            <EditForm method="post" Model="Feedback" OnValidSubmit="AddFeedback" FormName="create">
                 <DataAnnotationsValidator />
-                <ValidationSummary class="text-danger" role="alert" />
+                <ValidationSummary class="validation-summary" role="alert" />
 
                 <div class="mb-3">
                     <label for="feedbackid" class="form-label">Feedback ID:</label>
@@ -36,7 +35,7 @@
 
                 <div class="mb-3">
                     <label for="comments" class="form-label">Comments:</label>
-                    <InputText id="comments" @bind-Value="Feedback.Comments" class="form-control" />
+                    <InputTextArea id="comments" @bind-Value="Feedback.Comments" class="form-control comments-textarea" />
                     <ValidationMessage For="() => Feedback.Comments" class="text-danger" />
                 </div>
 
@@ -82,14 +81,13 @@
                     <ValidationMessage For="() => Feedback.UpdatedBy" class="text-danger" />
                 </div>
 
-                <button type="submit" class="btn btn-primary">Create</button>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <a href="/feedbacks" class="btn btn-secondary">Back to List</a>
+                </div>
             </EditForm>
         </div>
     </div>
-</div>
-
-<div>
-    <a href="/feedbacks">Back to List</a>
 </div>
 
 @code {
