@@ -13,7 +13,7 @@ namespace OzoneFitness.Configurations.Entities
             builder.HasData(
                new Customer
                {
-                   Id = 1,
+                   CustomerId = 1,
                    Name = "Jonas",
                    Email = "Jonas@gmail.com",
                    MembershipStatus = "Member",
@@ -24,7 +24,7 @@ namespace OzoneFitness.Configurations.Entities
                },
                new Customer
                {
-                   Id = 2,
+                   CustomerId = 2,
                    Name = "Sherman",
                    Email = "Sherman@gmail.com",
                    MembershipStatus = "Nil",

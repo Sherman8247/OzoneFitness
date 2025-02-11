@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OzoneFitness.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,12 +81,13 @@ namespace OzoneFitness.Migrations
                 name: "Customer",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MembershipStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -94,7 +95,7 @@ namespace OzoneFitness.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customer", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,15 +301,15 @@ namespace OzoneFitness.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "0c5985a0-4402-4ab8-a500-0a50185d7830", "OzoneFitnessUser", "admin@localhost.com", true, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAENfPUUz624Y8i3grgwvCSCYMe0z9OqrOet9ESPBuvwnuos1luWC6z32icoGFyA4Yhw==", null, false, "cd83a659-d827-45f4-8fb7-ebb79a01875d", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "fc0a05d7-ee83-4332-9afc-abf4e8c0741f", "OzoneFitnessUser", "admin@localhost.com", true, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEMPs8erdhtnSU99U0ClsGB+MMgJGweM3f4t4lOcXLJl8AQKpuPcbiXEDB9LFAp9cHw==", null, false, "f3d4b9ac-0ce8-4329-ae5b-c4af1305434c", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customer",
-                columns: new[] { "Id", "CreatedBy", "CustomerId", "DateCreated", "DateUpdated", "Email", "MembershipStatus", "Name", "UpdatedBy" },
+                columns: new[] { "CustomerId", "CreatedBy", "DateCreated", "DateUpdated", "Email", "Id", "Image", "MembershipStatus", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", 0, new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(561), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(573), "Jonas@gmail.com", "Member", "Jonas", "System" },
-                    { 2, "System", 0, new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(575), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(575), "Sherman@gmail.com", "Nil", "Sherman", "System" }
+                    { 1, "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2569), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2583), "Jonas@gmail.com", 0, null, "Member", "Jonas", "System" },
+                    { 2, "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2586), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2586), "Sherman@gmail.com", 0, null, "Nil", "Sherman", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -316,8 +317,8 @@ namespace OzoneFitness.Migrations
                 columns: new[] { "Id", "Address", "Capacity", "CreatedBy", "DateCreated", "DateUpdated", "GymId", "OperatingHours", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "Pasir ris Mall", 150, "System", new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(759), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(759), 0, "12", "System" },
-                    { 2, "Tampines Mall", 200, "System", new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(761), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(762), 0, "10", "System" }
+                    { 1, "Pasir ris Mall", 150, "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2767), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2768), 0, "12", "System" },
+                    { 2, "Tampines Mall", 200, "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2769), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2770), 0, "10", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -325,8 +326,8 @@ namespace OzoneFitness.Migrations
                 columns: new[] { "Id", "ContactInfo", "CreatedBy", "DateCreated", "DateUpdated", "GymId", "Image", "Name", "TrainerId", "UpdatedBy", "YearsOfExperience" },
                 values: new object[,]
                 {
-                    { 1, "12345678", "System", new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(901), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(902), 0, null, "Mr Goh", 0, "System", 12 },
-                    { 2, "87654321", "System", new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(904), new DateTime(2025, 2, 9, 1, 13, 10, 182, DateTimeKind.Local).AddTicks(904), 0, null, "Mr Tang", 0, "System", 8 }
+                    { 1, "12345678", "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2867), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2868), 0, null, "Mr Goh", 0, "System", 12 },
+                    { 2, "87654321", "System", new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2869), new DateTime(2025, 2, 11, 21, 43, 3, 541, DateTimeKind.Local).AddTicks(2870), 0, null, "Mr Tang", 0, "System", 8 }
                 });
 
             migrationBuilder.InsertData(

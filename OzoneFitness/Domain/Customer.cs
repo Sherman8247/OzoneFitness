@@ -6,7 +6,6 @@ public class Customer : BaseDomainBooking
     public string Name { get; set; }
     public string Email { get; set; }
     public string MembershipStatus { get; set; }
+    public byte[]? Image { get; set; }
 
-    //public ICollection<Feedback> Feedbacks { get; set; }
-    //public ICollection<Booking> Bookings { get; set; }
 }

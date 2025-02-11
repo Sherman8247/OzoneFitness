@@ -4,45 +4,62 @@
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
 
-<PageTitle>Details</PageTitle>
+<PageTitle>Customer Details</PageTitle>
+<link rel="stylesheet" href="css/details.razor.css">
 
-<h1>Details</h1>
+<h1>Customer Details</h1>
 <body>
+    <div class="details-container">
+        @if (customer is null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <!-- Image Section -->
+            <div class="image-container">
+                @if (customer.Image != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(customer.Image)"
+                         alt="Customer Image"
+                         class="customer-img" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </div>
 
+            <!-- Details Section -->
+            <div class="details-content">
+                <h2>Customer</h2>
+                <dl class="row">
+                    <dt class="col-sm-3">CustomerID</dt>
+                    <dd class="col-sm-9">@customer.CustomerId</dd>
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9">@customer.Name</dd>
+                    <dt class="col-sm-3">Email</dt>
+                    <dd class="col-sm-9">@customer.Email</dd>
+                    <dt class="col-sm-3">MembershipStatus</dt>
+                    <dd class="col-sm-9">@customer.MembershipStatus</dd>
+                    <dt class="col-sm-3">DateCreated</dt>
+                    <dd class="col-sm-9">@customer.DateCreated</dd>
+                    <dt class="col-sm-3">DateUpdated</dt>
+                    <dd class="col-sm-9">@customer.DateUpdated</dd>
+                    <dt class="col-sm-3">CreatedBy</dt>
+                    <dd class="col-sm-9">@customer.CreatedBy</dd>
+                    <dt class="col-sm-3">UpdatedBy</dt>
+                    <dd class="col-sm-9">@customer.UpdatedBy</dd>
+                </dl>
+
+                <div>
+                    <a href="@($"/customers/edit?id={customer.CustomerId}")">Edit Details</a> |
+                    <a href="@($"/customers")">Back to List</a>
+                </div>
+            </div>
+        }
+    </div>
 </body>
-<div>
-    <h2>Customer</h2>
-    <hr />
-    @if (customer is null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
-        <dl class="row">
-            <dt class="col-sm-2">CustomerID</dt>
-            <dd class="col-sm-10">@customer.CustomerId</dd>
-            <dt class="col-sm-2">Name</dt>
-            <dd class="col-sm-10">@customer.Name</dd>
-            <dt class="col-sm-2">Email</dt>
-            <dd class="col-sm-10">@customer.Email</dd>
-            <dt class="col-sm-2">MembershipStatus</dt>
-            <dd class="col-sm-10">@customer.MembershipStatus</dd>
-            <dt class="col-sm-2">DateCreated</dt>
-            <dd class="col-sm-10">@customer.DateCreated</dd>
-            <dt class="col-sm-2">DateUpdated</dt>
-            <dd class="col-sm-10">@customer.DateUpdated</dd>
-            <dt class="col-sm-2">CreatedBy</dt>
-            <dd class="col-sm-10">@customer.CreatedBy</dd>
-            <dt class="col-sm-2">UpdatedBy</dt>
-            <dd class="col-sm-10">@customer.UpdatedBy</dd>
-        </dl>
-        <div>
-            <a href="@($"/customers/edit?id={customer.CustomerId}")">Edit Details</a> |
-            <a href="@($"/customers")">Back to List</a>
-        </div>
-    }
-</div>
 
 @code {
     private Customer? customer;
@@ -58,6 +75,10 @@
         if (customer is null)
         {
             NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+            Console.WriteLine($"Customer: {customer.Name}, Image Length: {customer.Image?.Length}");
         }
     }
 }
