@@ -1,8 +1,10 @@
 ﻿@page "/schedules/edit"
 @using Microsoft.EntityFrameworkCore
 @using OzoneFitness.Domain
+@using OzoneFitness.Data
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 <PageTitle>Edit Schedule</PageTitle>
 <link rel="stylesheet" href="css/Edit.razor.css">
@@ -24,7 +26,6 @@ else
             <EditForm method="post" Model="Schedule" OnValidSubmit="UpdateSchedule" FormName="edit">
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert" />
-                <input type="hidden" name="Schedule.Id" value="@Schedule.Id" />
                 <div class="mb-3">
                     <label for="scheduleid" class="form-label">Schedule ID:</label>
                     <InputNumber id="scheduleid" @bind-Value="Schedule.ScheduleId" class="form-control" ReadOnly />
@@ -100,15 +101,43 @@ else
     private async Task UpdateSchedule()
     {
         using var context = DbFactory.CreateDbContext();
-        context.Attach(Schedule!).State = EntityState.Modified;
+
+        if (Schedule is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
+
+
+        var existingSchedule = await context.Schedule.FindAsync(Schedule.Id);
+
+        if (existingSchedule == null)
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
+
+        // Update the properties of the existing schedule with the values from the bound Schedule
+        existingSchedule.ScheduleId = Schedule.ScheduleId;
+        existingSchedule.DayOfWeek = Schedule.DayOfWeek;
+        existingSchedule.StartTime = Schedule.StartTime;
+        existingSchedule.EndTime = Schedule.EndTime;
+        existingSchedule.TrainerId = Schedule.TrainerId;
+        existingSchedule.DateCreated = Schedule.DateCreated;
+        existingSchedule.DateUpdated = DateTime.Now;  // Update DateUpdated
+        existingSchedule.CreatedBy = Schedule.CreatedBy;
+        existingSchedule.UpdatedBy = Schedule.UpdatedBy;
+
+
 
         try
         {
             await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/schedules");
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!ScheduleExists(Schedule!.Id))
+            if (!ScheduleExists(Schedule.Id))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -118,7 +147,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/schedules");
+
     }
 
     private bool ScheduleExists(int id)

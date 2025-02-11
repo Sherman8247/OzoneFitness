@@ -69,7 +69,7 @@
                 <td>
                     <AuthorizeView Roles="Administrator">
                         <Authorized>
-                            <a href="@($"schedules/edit?id={schedule.ScheduleId}")" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="@($"/schedules/edit?id={schedule.Id}")" class="btn btn-primary btn-sm">Edit</a>
                             <a href="@($"schedules/details?id={schedule.ScheduleId}")" class="btn btn-info btn-sm">Details</a>
                             <a href="@($"schedules/delete?id={schedule.ScheduleId}")" class="btn btn-danger btn-sm">Delete</a>
                         </Authorized>
