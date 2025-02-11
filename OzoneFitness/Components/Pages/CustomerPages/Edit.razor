@@ -3,102 +3,102 @@
 @using OzoneFitness.Domain
 @inject IDbContextFactory<OzoneFitness.Data.OzoneFitnessContext> DbFactory
 @inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 <PageTitle>Edit Customer</PageTitle>
 <link rel="stylesheet" href="css/Edit.razor.css">
 
-<body>
-    <div class="container">
-        <h1 class="page-title">Edit Customer</h1>
-        <p class="page-description">Update the details for the customer below.</p>
+<h1>Edit</h1>
 
-        @if (Customer == null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
+<h2>Customer</h2>
+<hr />
+
+@if (Customer is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
             <EditForm method="post" Model="Customer" OnValidSubmit="UpdateCustomer" FormName="editCustomerForm" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary role="alert" />
 
-                <!-- Customer ID -->
-                <div class="form-group">
-                    <label for="customerid">Customer ID:</label>
-                    <InputNumber id="customerid" @bind-Value="Customer.CustomerId" class="form-control" />
+                <div class="mb-3">
+                    <label for="customerid" class="form-label">Customer ID:</label>
+                    <InputNumber id="customerid" @bind-Value="Customer.CustomerId" class="form-control" readonly />
                     <ValidationMessage For="() => Customer.CustomerId" class="text-danger" />
                 </div>
 
-                <!-- Name -->
-                <div class="form-group">
-                    <label for="name">Name:</label>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
                     <InputText id="name" @bind-Value="Customer.Name" class="form-control" />
                     <ValidationMessage For="() => Customer.Name" class="text-danger" />
                 </div>
 
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email:</label>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
                     <InputText id="email" @bind-Value="Customer.Email" class="form-control" />
                     <ValidationMessage For="() => Customer.Email" class="text-danger" />
                 </div>
 
-                <!-- Membership Status -->
-                <div class="form-group">
-                    <label for="membershipstatus">Membership Status:</label>
+                <div class="mb-3">
+                    <label for="membershipstatus" class="form-label">Membership Status:</label>
                     <InputText id="membershipstatus" @bind-Value="Customer.MembershipStatus" class="form-control" />
                     <ValidationMessage For="() => Customer.MembershipStatus" class="text-danger" />
                 </div>
 
-                <!-- Date Created -->
-                <div class="form-group">
-                    <label for="datecreated">Date Created:</label>
+                <div class="mb-3">
+                    <label for="datecreated" class="form-label">Date Created:</label>
                     <InputDate id="datecreated" @bind-Value="Customer.DateCreated" class="form-control" />
                     <ValidationMessage For="() => Customer.DateCreated" class="text-danger" />
                 </div>
 
-                <!-- Date Updated -->
-                <div class="form-group">
-                    <label for="dateupdated">Date Updated:</label>
+                <div class="mb-3">
+                    <label for="dateupdated" class="form-label">Date Updated:</label>
                     <InputDate id="dateupdated" @bind-Value="Customer.DateUpdated" class="form-control" />
                     <ValidationMessage For="() => Customer.DateUpdated" class="text-danger" />
                 </div>
 
-                <!-- Created By -->
-                <div class="form-group">
-                    <label for="createdby">Created By:</label>
+                <div class="mb-3">
+                    <label for="createdby" class="form-label">Created By:</label>
                     <InputText id="createdby" @bind-Value="Customer.CreatedBy" class="form-control" />
                     <ValidationMessage For="() => Customer.CreatedBy" class="text-danger" />
                 </div>
 
-                <!-- Updated By -->
-                <div class="form-group">
-                    <label for="updatedby">Updated By:</label>
+                <div class="mb-3">
+                    <label for="updatedby" class="form-label">Updated By:</label>
                     <InputText id="updatedby" @bind-Value="Customer.UpdatedBy" class="form-control" />
                     <ValidationMessage For="() => Customer.UpdatedBy" class="text-danger" />
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a href="/customers" class="btn btn-secondary">Back to List</a>
-                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
-        }
+        </div>
     </div>
-</body>
+}
+
+<div>
+    <a href="/customers">Back to List</a>
+</div>
 
 @code {
     [SupplyParameterFromQuery]
-    private int ID { get; set; }
-
-    [SupplyParameterFromForm]
+    public int Id { get; set; }
     private Customer? Customer { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
-        Customer ??= await context.Customer.FirstOrDefaultAsync(m => m.CustomerId == ID);
+
+        if (Id == 0) // Validate the ID if needed
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
+
+        Customer = await context.Customer.AsNoTracking().FirstOrDefaultAsync(m => m.CustomerId == Id);
 
         if (Customer == null)
         {
@@ -108,18 +108,26 @@
 
     private async Task UpdateCustomer()
     {
-        using var context = DbFactory.CreateDbContext();
-        //context.Attach(Customer!).State = EntityState.Modified; //REMOVED
+        if (Customer is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+            return;
+        }
 
-        context.Update(Customer!); // UPDATED
+        using var context = DbFactory.CreateDbContext();
+
+        // Attach the entity and mark it as modified
+        context.Attach(Customer);
+        context.Entry(Customer).State = EntityState.Modified;
 
         try
         {
             await context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/customers");
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!CustomerExists(Customer!.Id))
+            if (!CustomerExists(Customer.CustomerId))
             {
                 NavigationManager.NavigateTo("notfound");
             }
@@ -128,13 +136,11 @@
                 throw;
             }
         }
-
-        NavigationManager.NavigateTo("/customers");
     }
 
     private bool CustomerExists(int id)
     {
         using var context = DbFactory.CreateDbContext();
-        return context.Customer.Any(e => e.Id == id);
+        return context.Customer.Any(e => e.CustomerId == id);
     }
 }
