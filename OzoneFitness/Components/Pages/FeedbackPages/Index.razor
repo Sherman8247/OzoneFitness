@@ -72,9 +72,9 @@
                         <td>
                             <AuthorizeView Roles="Administrator">
                                 <Authorized>
-                                    <a href="@($"feedbacks/edit?id={feedback.FeedbackId}")" class="btn btn-info">Edit</a>
-                                    <a href="@($"feedbacks/details?id={feedback.FeedbackId}")" class="btn btn-info">Details</a>
-                                    <a href="@($"feedbacks/delete?id={feedback.FeedbackId}")" class="btn btn-danger">Delete</a>
+                                    <a href="@($"/feedbacks/edit?id={feedback.FeedbackId}")" class=" btn btn-danger">Edit</a>
+                                    <a href="@($"/feedbacks/details?id={feedback.FeedbackId}")" class="btn btn-info">Details</a>
+                                    <a href="@($"/feedbacks/delete?id={feedback.FeedbackId}")" class="btn btn-danger">Delete</a>
                                 </Authorized>
                             </AuthorizeView>
                         </td>
